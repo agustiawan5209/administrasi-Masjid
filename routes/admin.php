@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth','role:Admin'])->group(function(){
+Route::middleware(['auth', 'role:Admin'])->group(function () {
 
     // Route Jadwal Kegiatan
     Route::group(['prefix' => 'Kegiatan', 'as' => 'Kegiatan.'], function () {
@@ -58,8 +58,21 @@ Route::middleware(['auth','role:Admin'])->group(function(){
         });
     });
 
-
     // Route Data Donatur
+    Route::group(['prefix' => 'Donatur', 'as' => 'Donatur.'], function () {
+        Route::controller(DonaturController::class)->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/form', 'create')->name('create');
+            Route::get('/edit', 'edit')->name('edit');
+            Route::get('/detail', 'show')->name('show');
+
+            Route::post('/store', 'store')->name('store');
+            Route::put('/update', 'update')->name('update');
+            Route::delete('/delete', 'destroy')->name('delete');
+        });
+    });
+
+    // Route Data Artikel
     Route::group(['prefix' => 'Artikel', 'as' => 'Artikel.'], function () {
         Route::controller(ArtikelController::class)->group(function () {
             Route::get('/', 'index')->name('index');
