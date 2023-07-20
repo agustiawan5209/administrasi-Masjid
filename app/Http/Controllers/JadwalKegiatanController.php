@@ -17,6 +17,8 @@ class JadwalKegiatanController extends Controller
     {
         return Inertia::render('Admin/KegiatanJadwal/Index',[
             'jadwal'=> JadwalKegiatan::orderBy('id','desc')->paginate(10),
+            'search'=> Request::input('search')
+
         ]);
     }
 

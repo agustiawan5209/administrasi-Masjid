@@ -14,10 +14,12 @@ const props = defineProps({
         type: Object,
         default: () => ({}),
     },
+    search: String,
+
 })
 // Search Form
 const SearchForm = useForm({});
-const search = ref(null);
+const search = ref(props.search);
 
 watch(search, (value)=>{
     SearchForm.get(route('Kajian.index', {

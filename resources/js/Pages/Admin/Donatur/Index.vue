@@ -14,10 +14,11 @@ const props = defineProps({
         type: Object,
         default: () => ({}),
     },
+    search: String,
 })
 // Search Form
 const SearchForm = useForm({});
-const search = ref(null);
+const search = ref(props.search);
 
 watch(search, (value)=>{
     SearchForm.get(route('Donatur.index', {
@@ -79,7 +80,7 @@ function deleteJadwal() {
                                                     clip-rule="evenodd" />
                                             </svg>
                                         </div>
-                                        <input type="text" id="simple-search" v-model="search"
+                                        <input type="text" id="simple-search" v-model="search" autofocus
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 "
                                             placeholder="Search" required="">
                                     </div>

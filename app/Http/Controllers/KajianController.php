@@ -17,6 +17,8 @@ class KajianController extends Controller
     {
         return Inertia::render('Admin/Kajian/Index', [
             'kajian'=> Kajian::orderBy('id','desc')->filter(Request::only('search', 'order'))->paginate(10),
+            'search'=> Request::input('search')
+
         ]);
     }
 

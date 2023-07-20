@@ -17,6 +17,7 @@ class DonaturController extends Controller
     {
         return Inertia::render('Admin/Donatur/Index', [
             'donatur' => Donatur::orderBy('id', 'desc')->filter(Request::only('search'))->paginate(10),
+            'search'=> Request::input('search')
         ]);
     }
 

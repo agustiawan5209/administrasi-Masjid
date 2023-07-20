@@ -18,6 +18,8 @@ class ArtikelController extends Controller
     {
         return Inertia::render('Admin/Pengumuman/Index', [
             'artikel' => Artikel::orderBy('id', 'desc')->filter(Request::only('search'))->paginate(10),
+            'search'=> Request::input('search')
+
         ]);
     }
 

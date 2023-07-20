@@ -2,7 +2,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import { defineProps, ref } from 'vue';
+import { defineProps, ref,watch } from 'vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import Modal from '@/Components/Modal.vue';
@@ -13,8 +13,20 @@ const props = defineProps({
         type: Object,
         default: () => ({}),
     },
+    search: String,
 })
 
+// Search Form
+const SearchForm = useForm({});
+const search = ref(props.search);
+
+watch(search, (value)=>{
+    SearchForm.get(route('Kegiatan.index', {
+        search: value,
+    }));
+})
+
+// Modal
 const modalDelete = ref(false);
 const FormDelete = useForm({
     slug: null,
@@ -67,7 +79,7 @@ function deleteJadwal() {
                                                     clip-rule="evenodd" />
                                             </svg>
                                         </div>
-                                        <input type="text" id="simple-search"
+                                        <input type="text" id="simple-search" v-model="search"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 "
                                             placeholder="Search" required="">
                                     </div>
