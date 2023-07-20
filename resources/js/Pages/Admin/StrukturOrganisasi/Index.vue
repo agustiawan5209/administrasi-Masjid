@@ -11,8 +11,8 @@ import FlashMessage from '@/Components/FlashMessage.vue';
 
 const props = defineProps({
     struktur: {
-        type:Object,
-        default:()=>({}),
+        type: Object,
+        default: () => ({}),
     }
 })
 const ModalVar = ref(false);
@@ -24,8 +24,8 @@ const Form = useForm({
 function showModal() {
     ModalVar.value = true;
 }
-function closeModal(){
-    ModalVar.value=false;
+function closeModal() {
+    ModalVar.value = false;
     Form.reset('gambar')
 }
 const UrlFile = ref(null);
@@ -34,9 +34,9 @@ function fileSelected(e) {
     Form.gambar = e.target.files[0];
     UrlFile.value = URL.createObjectURL(e.target.files[0])
 }
-function submit(){
+function submit() {
     Form.post(route('Struktur.store'), {
-        onSuccess:()=>{
+        onSuccess: () => {
             Form.reset()
             ModalVar.value = false;
         }
@@ -50,19 +50,21 @@ function submit(){
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Struktur Organisasi</h2>
-            <FlashMessage/>
+            <FlashMessage />
         </template>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <PrimaryButton @click="showModal" v-if="struktur == null">Tambah</PrimaryButton>
-                    <PrimaryButton @click="showModal" v-else>Ganti</PrimaryButton>
-                    <div class="w-full bg-red-300 h-screen">
-                        <img :src="struktur.path_gambar" alt="">
+        <div class="py-4">
+            <section class="bg-transparent px-3 sm:px-5">
+                <div class="mx-auto max-w-screen-xl ">
+                    <div class="max-w-7xl mx-auto bg-white p-4 lg:p-12 overflow-hidden shadow-sm sm:rounded-lg">
+                        <PrimaryButton @click="showModal" v-if="struktur == null">Tambah</PrimaryButton>
+                            <PrimaryButton @click="showModal" v-else>Ganti</PrimaryButton>
+                            <div class="w-full bg-red-300 h-screen">
+                                <img :src="struktur.path_gambar" alt="">
+                            </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
         <Modal :show="ModalVar">
 
@@ -87,7 +89,7 @@ function submit(){
 
                 </div>
                 <div class=" bg-gray-100 px-2 py-4">
-                    <InputLabel value="Nama"/>
+                    <InputLabel value="Nama" />
                     <TextInput v-model="Form.nama" />
                     <InputError :message="Form.errors.nama" />
                 </div>

@@ -60,9 +60,8 @@ function deleteJadwal() {
             <FlashMessage />
         </template>
 
-        <div class="py-12">
-            <section class="bg-gray-50 p-3 sm:p-5">
-
+        <div class="py-4">
+            <section class="bg-transparent px-3 sm:px-5">
                 <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
                     <!-- Start coding here -->
                     <div class="bg-white relative shadow-md sm:rounded-lg overflow-hidden">
@@ -163,4 +162,5 @@ function deleteJadwal() {
                 </div>
             </Modal>
         </div>
-    </AuthenticatedLayout></template>
+    </AuthenticatedLayout>
+</template>
