@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\JadwalKegiatanController;
+use App\Http\Controllers\KajianController;
 use App\Http\Controllers\StrukturOrganisasiController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware(['auth','role:Admin'])->group(function(){
+
+    // Route Jadwal Kegiatan
     Route::group(['prefix' => 'Kegiatan', 'as' => 'Kegiatan.'], function () {
         Route::controller(JadwalKegiatanController::class)->group(function () {
             Route::get('/', 'index')->name('index');
@@ -28,9 +31,25 @@ Route::middleware(['auth','role:Admin'])->group(function(){
             Route::delete('/delete', 'delete')->name('delete');
         });
     });
+
+    // Route Struktur Organisasi
     Route::group(['prefix' => 'Struktur', 'as' => 'Struktur.'], function () {
         Route::controller(StrukturOrganisasiController::class)->group(function () {
             Route::get('/', 'index')->name('index');
+            Route::post('/store', 'store')->name('store');
+            Route::put('/update', 'update')->name('update');
+            Route::delete('/delete', 'delete')->name('delete');
+        });
+    });
+
+    // ROute Kajian
+    Route::group(['prefix' => 'Kajian', 'as' => 'Kajian.'], function () {
+        Route::controller(KajianController::class)->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/form', 'create')->name('create');
+            Route::get('/edit', 'edit')->name('edit');
+            Route::get('/detail', 'show')->name('show');
+
             Route::post('/store', 'store')->name('store');
             Route::put('/update', 'update')->name('update');
             Route::delete('/delete', 'delete')->name('delete');
