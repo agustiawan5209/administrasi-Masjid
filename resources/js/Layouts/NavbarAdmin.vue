@@ -8,7 +8,7 @@ import NavLink from '@/Components/NavLink.vue';
         <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
             Dashboard
         </NavLink>
-        <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
+        <NavLink :href="route('Struktur.index')" :active="route().current('Struktur.index')">
             Struktur Organisasi
         </NavLink>
         <NavLink :href="route('Kegiatan.index')" :active="route().current('Kegiatan.index')">
