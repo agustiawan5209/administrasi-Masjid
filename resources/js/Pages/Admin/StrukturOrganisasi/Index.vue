@@ -7,6 +7,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue'
 import TextInput from '@/Components/TextInput.vue'
 import InputError from '@/Components/InputError.vue'
 import InputLabel from '@/Components/InputLabel.vue'
+import FlashMessage from '@/Components/FlashMessage.vue';
 
 const props = defineProps({
     struktur: {
@@ -49,6 +50,7 @@ function submit(){
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Struktur Organisasi</h2>
+            <FlashMessage/>
         </template>
 
         <div class="py-12">

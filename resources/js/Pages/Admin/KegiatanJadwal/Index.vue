@@ -6,6 +6,7 @@ import { defineProps, ref } from 'vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import Modal from '@/Components/Modal.vue';
+import FlashMessage from '@/Components/FlashMessage.vue';
 
 const props = defineProps({
     jadwal: {
@@ -43,6 +44,7 @@ function deleteJadwal() {
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Kegiatan Jadwal</h2>
+            <FlashMessage />
         </template>
 
         <div class="py-12">
