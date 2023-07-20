@@ -22,6 +22,7 @@ class UpdateJadwalKegiatanRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'id'=> 'required|exists:jadwal_kegiatans,id',
             'tanggal'=> 'required|date',
             'waktu'=> 'required|string',
             'kegiatan'=> 'required|string',

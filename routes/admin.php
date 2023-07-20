@@ -23,6 +23,6 @@ Route::group(['prefix' => 'Kegiatan', 'as' => 'Kegiatan.', 'middleware'=> ['auth
 
         Route::post('/store', 'store')->name('store');
         Route::put('/update', 'update')->name('update');
-        Route::delete('/delete', 'delete')->name('update');
+        Route::delete('/delete', 'delete')->name('delete');
     });
 });

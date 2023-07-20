@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('jadwal_kegiatans', function (Blueprint $table) {
             $table->id();
             $table->date('tanggal');
-            $table->string('waktu');
-            $table->string('kegiatan');
-            $table->string('waktu');
-            $table->string('ket');
+            $table->string('waktu',100);
+            $table->string('kegiatan',100);
+            $table->string('tempat',100);
+            $table->longText('ket');
             $table->string('penanggung_jawab');
             $table->timestamps();
         });
