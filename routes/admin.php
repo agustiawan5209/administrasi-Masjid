@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\DonaturController;
 use App\Http\Controllers\JadwalKegiatanController;
 use App\Http\Controllers\KajianController;
@@ -66,6 +67,20 @@ Route::middleware(['auth','role:Admin'])->group(function(){
 
             Route::post('/store', 'store')->name('store');
             Route::put('/update', 'update')->name('update');
+            Route::delete('/delete', 'destroy')->name('delete');
+        });
+    });
+
+    // Route Data Donatur
+    Route::group(['prefix' => 'Artikel', 'as' => 'Artikel.'], function () {
+        Route::controller(ArtikelController::class)->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/form', 'create')->name('create');
+            Route::get('/edit', 'edit')->name('edit');
+            Route::get('/detail', 'show')->name('show');
+
+            Route::post('/store', 'store')->name('store');
+            Route::post('/update', 'update')->name('update');
             Route::delete('/delete', 'destroy')->name('delete');
         });
     });

@@ -23,7 +23,7 @@ import NavLink from '@/Components/NavLink.vue';
         <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
             Laporan
         </NavLink>
-        <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
+        <NavLink :href="route('Artikel.index')" :active="route().current('Artikel.index')">
             Pengumuman
         </NavLink>
 
