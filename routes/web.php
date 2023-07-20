@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\DonaturController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +38,16 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
+ // Route Data Donatur
+ Route::group(['prefix' => 'Donatur', 'as' => 'Donatur.', 'middleware'=> ['auth','role:bendahara,Admin']], function () {
+    Route::controller(DonaturController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/form', 'create')->name('create');
+        Route::get('/edit', 'edit')->name('edit');
+        Route::get('/detail', 'show')->name('show');
+
+        Route::post('/store', 'store')->name('store');
+        Route::put('/update', 'update')->name('update');
+        Route::delete('/delete', 'destroy')->name('delete');
+    });
+});

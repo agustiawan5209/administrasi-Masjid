@@ -5,6 +5,7 @@ import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import NavbarAdmin from './NavbarAdmin.vue';
+import NavbarBendahara from './NavbarBendahara.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
 
@@ -29,7 +30,8 @@ const showingNavigationDropdown = ref(false);
                             </div>
 
                             <!-- Navigation Links -->
-                            <NavbarAdmin />
+                            <NavbarAdmin v-if="$page.props.auth.user.role == 'Admin'" />
+                            <NavbarBendahara v-if="$page.props.auth.user.role == 'bendahara'" />
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
