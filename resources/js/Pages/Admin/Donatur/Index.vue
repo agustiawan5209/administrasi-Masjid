@@ -133,7 +133,7 @@ function deleteJadwal() {
                                                     <DropdownLink class="bg-green-500 hover:bg-green-600 active:bg-green-400 text-white"
                                                         :href="route('Donatur.edit', { nama: item.nama, slug: item.id, alamat: item.alamat, })">
                                                         Edit </DropdownLink>
-                                                    <PrimaryButton type="button" class="bg-red-500 hover:bg-red-600 active:bg-red-400 w-full block"
+                                                    <PrimaryButton type="button" class="bg-error text-white hover:bg-red-600 active:bg-red-400 w-full block"
                                                         @click="showModaldelete(item.id)">
                                                         Hapus
                                                     </PrimaryButton>
@@ -156,7 +156,7 @@ function deleteJadwal() {
                             <PrimaryButton type="button" @click="deleteJadwal()" class="bg-blue-500 hover:bg-blue-600 active:bg-blue-800">Ya
                             </PrimaryButton>
                             <PrimaryButton type="button" @click="closeModal()"
-                                class="bg-red-500 hover:bg-red-600 active:bg-red-800">Batal</PrimaryButton>
+                                class="bg-error hover:bg-red-600 active:bg-red-800">Batal</PrimaryButton>
                         </div>
                     </div>
                 </div>
