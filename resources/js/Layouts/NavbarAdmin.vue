@@ -17,7 +17,7 @@ import NavLink from '@/Components/NavLink.vue';
         <NavLink :href="route('Kajian.index')" :active="route().current('Kajian.index')">
             jadwal Kajian
         </NavLink>
-        <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
+        <NavLink :href="route('Donatur.Index')" :active="route().current('Donatur.Index')">
             Data Donatur
         </NavLink>
         <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
