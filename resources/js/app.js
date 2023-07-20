@@ -16,7 +16,7 @@ createInertiaApp({
         return createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue, Ziggy)
-            .use(QuillEditor)
+            .mixin({components:{QuillEditor}})
             .mount(el);
     },
     progress: {
