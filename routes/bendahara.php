@@ -27,7 +27,7 @@ Route::middleware(['auth', 'role:bendahara'])->group(function () {
             Route::get('/getDonatur', 'GetDonatur')->name('getDonatur');
 
             Route::post('/store', 'store')->name('store');
-            Route::put('/update', 'update')->name('update');
+            Route::post('/update', 'update')->name('update');
             Route::delete('/delete', 'delete')->name('delete');
         });
     });
