@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('saldo_dompets', function (Blueprint $table) {
             $table->id();
-            $table->string('jenis_saldo',50);
+            $table->string('jenis_saldo',50)->nullable();
             $table->bigInteger('saldo_masuk')->nullable();
             $table->bigInteger('saldo_keluar')->nullable();
             $table->bigInteger('total_saldo');
