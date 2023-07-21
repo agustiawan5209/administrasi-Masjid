@@ -14,7 +14,7 @@ import NavLink from '@/Components/NavLink.vue';
         <NavLink :href="route('KasMasjid.index')" :active="route().current('KasMasjid.index') || route().current('KasMasjid.create') || route().current('KasMasjid.edit')">
             Data Transaksi
         </NavLink>
-        <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
+        <NavLink :href="route('Laporan.keuangan-bendahara')" :active="route().current('Laporan.keuangan-bendahara')">
             laporan Keuangan
         </NavLink>
 

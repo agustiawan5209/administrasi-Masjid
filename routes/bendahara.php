@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataDonaturController;
 use App\Http\Controllers\KasMasjidController;
+use App\Http\Controllers\LaporanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,11 @@ Route::middleware(['auth', 'role:bendahara'])->group(function () {
             Route::post('/store', 'store')->name('store');
             Route::put('/update', 'update')->name('update');
             Route::delete('/delete', 'delete')->name('delete');
+        });
+    });
+    Route::group(['prefix' => 'Laporan', 'as' => 'Laporan.'], function () {
+        Route::controller(LaporanController::class)->group(function () {
+            Route::get('/keuangan', 'LaporanKeuangan')->name('keuangan-bendahara');
         });
     });
 
