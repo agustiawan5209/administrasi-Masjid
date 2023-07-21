@@ -10,5 +10,5 @@ class SaldoDompet extends Model
     use HasFactory;
 
     protected $table = 'saldo_dompets';
-    protected $fillable = ['saldo_masuk', 'saldo_keluar', 'total_saldo'];
+    protected $fillable = ['jenis_saldo','saldo_masuk', 'saldo_keluar', 'total_saldo'];
 }
