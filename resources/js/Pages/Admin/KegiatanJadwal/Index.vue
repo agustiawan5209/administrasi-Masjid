@@ -99,30 +99,33 @@ function deleteJadwal() {
                             <table class="w-full text-sm text-left text-gray-500">
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                                     <tr>
-                                        <th scope="col" class="px-4 py-3">Tanggal</th>
-                                        <th scope="col" class="px-4 py-3">Waktu</th>
-                                        <th scope="col" class="px-4 py-3">Kegiatan</th>
-                                        <th scope="col" class="px-4 py-3">Tempat</th>
-                                        <th scope="col" class="px-4 py-3">Ket</th>
-                                        <th scope="col" class="px-4 py-3">Penanggung Jawab</th>
-                                        <th scope="col" class="px-4 py-3">
+                                        <th scope="col" class="px-4 py-3 border">No.</th>
+                                        <th scope="col" class="px-4 py-3 border">Tanggal</th>
+                                        <th scope="col" class="px-4 py-3 border">Waktu</th>
+                                        <th scope="col" class="px-4 py-3 border">Kegiatan</th>
+                                        <th scope="col" class="px-4 py-3 border">Tempat</th>
+                                        <th scope="col" class="px-4 py-3 border">Ket</th>
+                                        <th scope="col" class="px-4 py-3 border">Penanggung Jawab</th>
+                                        <th scope="col" class="px-4 py-3 border">
                                             <span class="sr-only">Actions</span>
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="item in jadwal.data" class="border-b ">
+                                    <tr v-for="(item,index) in jadwal.data" class="border-b ">
+                                        <th class="border text-center">{{ (jadwal.current_page - 1) * jadwal.per_page + index+1 }}.</th>
+
                                         <th scope="row"
-                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap text-start ">
+                                            class="px-4 py-3 border font-medium text-gray-900 whitespace-nowrap text-start ">
                                             {{ item.tanggal }}</th>
-                                        <td class="px-4 py-3">{{ item.waktu }}</td>
-                                        <td class="px-4 py-3">{{ item.kegiatan }}</td>
-                                        <td class="px-4 py-3">{{ item.tempat }}</td>
-                                        <td class="px-4 py-3">
+                                        <td class="px-4 py-3 border">{{ item.waktu }}</td>
+                                        <td class="px-4 py-3 border">{{ item.kegiatan }}</td>
+                                        <td class="px-4 py-3 border">{{ item.tempat }}</td>
+                                        <td class="px-4 py-3 border">
                                             <p v-html="item.ket"></p>
                                         </td>
-                                        <td class="px-4 py-3">{{ item.penanggung_jawab }}</td>
-                                        <td class="px-4 py-3 flex items-center justify-start">
+                                        <td class="px-4 py-3 border">{{ item.penanggung_jawab }}</td>
+                                        <td class="px-4 py-3 border flex items-center justify-start">
                                             <Dropdown align="top" width="48">
                                                 <template #trigger>
                                                     <span class="inline-flex rounded-md">

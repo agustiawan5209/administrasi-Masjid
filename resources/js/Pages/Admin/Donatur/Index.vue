@@ -100,6 +100,7 @@ function deleteJadwal() {
                             <table class="w-full text-sm text-left text-gray-500">
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                                     <tr>
+                                        <th class="border" scope="col">No.</th>
                                         <th scope="col" class="px-4 py-3">Nama</th>
                                         <th scope="col" class="px-4 py-3">Alamat</th>
                                         <th scope="col" class="px-4 py-3">No. Telpon</th>
@@ -109,7 +110,9 @@ function deleteJadwal() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="item in donatur.data" class="border-b ">
+                                    <tr v-for="(item,index) in donatur.data" class="border-b ">
+                                        <th class="border text-center">{{ (donatur.current_page - 1) * donatur.per_page + index+1 }}.</th>
+
                                         <th scope="row"
                                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap text-start ">
                                             {{ item.nama }}</th>

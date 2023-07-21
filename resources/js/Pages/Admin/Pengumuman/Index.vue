@@ -102,31 +102,34 @@ function deleteJadwal() {
                             <table class="w-full text-sm text-left text-gray-500">
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                                     <tr>
-                                        <th scope="col" class="px-4 py-3">Foto</th>
-                                        <th scope="col" class="px-4 py-3">Tanggal</th>
-                                        <th scope="col" class="px-4 py-3">Judul</th>
-                                        <th scope="col" class="px-4 py-3">Kategori</th>
-                                        <th scope="col" class="px-4 py-3">isi</th>
-                                        <th scope="col" class="px-4 py-3">
+                                        <th scope="col" class="border">No.</th>
+                                        <th scope="col" class="px-4 py-3 border">Foto</th>
+                                        <th scope="col" class="px-4 py-3 border">Tanggal</th>
+                                        <th scope="col" class="px-4 py-3 border">Judul</th>
+                                        <th scope="col" class="px-4 py-3 border">Kategori</th>
+                                        <th scope="col" class="px-4 py-3 border">isi</th>
+                                        <th scope="col" class="px-4 py-3 border">
                                             <span class="sr-only">Actions</span>
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="item in artikel.data" class="border-b ">
+                                    <tr v-for="(item,index) in artikel.data" class="border-b ">
+                                        <th class="border text-center">{{ (artikel.current_page - 1) * artikel.per_page + index+1 }}.</th>
+
                                         <th scope="row"
-                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap text-start ">
+                                            class="px-4 py-3 border font-medium text-gray-900 whitespace-nowrap text-start ">
                                             <img :src="item.path_foto" :alt="item.judul" width="200"/>
                                         </th>
                                         <th scope="row"
-                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap text-start ">
+                                            class="px-4 py-3 border font-medium text-gray-900 whitespace-nowrap text-start ">
                                             {{ item.tanggal }}</th>
-                                        <td class="px-4 py-3">{{ item.judul }}</td>
-                                        <td class="px-4 py-3">{{ item.kategori }}</td>
-                                        <td class="px-4 py-3">
+                                        <td class="px-4 py-3 border">{{ item.judul }}</td>
+                                        <td class="px-4 py-3 border">{{ item.kategori }}</td>
+                                        <td class="px-4 py-3 border">
                                             <p v-html="item.isi"></p>
                                         </td>
-                                        <td class="px-4 py-3 flex items-center justify-start">
+                                        <td class="px-4 py-3 border flex items-center justify-start">
                                             <Dropdown align="top" width="48">
                                                 <template #trigger>
                                                     <span class="inline-flex rounded-md">

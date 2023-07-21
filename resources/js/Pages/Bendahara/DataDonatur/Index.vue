@@ -56,6 +56,7 @@ function deleteJadwal() {
         }
     })
 }
+console.log(props.data_donatur)
 </script>
 
 <template>
@@ -105,10 +106,12 @@ function deleteJadwal() {
                                 </div>
                             </div>
                         </div>
-                        <div class="overflow-x-auto">
+                        <div class="overflow-x-auto px-2">
                             <table class="w-full text-sm text-left text-gray-500">
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                                     <tr>
+                                        <th scope="col" class="border text-center">No.</th>
+
                                         <th scope="col" class="px-4 py-3 border">Bukti</th>
                                         <th scope="col" class="px-4 py-3 border">Nama</th>
                                         <th scope="col" class="px-4 py-3 border">Jenis</th>
@@ -121,7 +124,9 @@ function deleteJadwal() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="item in data_donatur.data" class="border-b ">
+                                    <tr v-for="(item,index) in data_donatur.data" class="border-b ">
+                                        <th class="border text-center">{{ (data_donatur.current_page - 1) * data_donatur.per_page + index+1 }}.</th>
+
                                         <td class="px-4 py-3 border w-32">
                                             <img :src="item.path_bukti" :alt="item.jenis" srcset="">
                                         </td>

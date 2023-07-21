@@ -102,6 +102,7 @@ function deleteJadwal() {
                             <table class="w-full text-sm text-left text-gray-500">
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                                     <tr>
+                                        <th scope="col" class="px-4 py-3">No.</th>
                                         <th scope="col" class="px-4 py-3">Tanggal</th>
                                         <th scope="col" class="px-4 py-3">Judul</th>
                                         <th scope="col" class="px-4 py-3">Uztadz</th>
@@ -113,7 +114,10 @@ function deleteJadwal() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="item in kajian.data" class="border-b ">
+                                    <tr v-for="(item,index) in kajian.data" class="border-b ">
+                                        <th class="border text-center">{{ (kajian.current_page - 1) * kajian.per_page + index+1 }}.</th>
+
+
                                         <th scope="row"
                                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap text-start ">
                                             {{ item.tanggal }}</th>

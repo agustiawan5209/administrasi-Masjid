@@ -171,10 +171,11 @@ function CariTanggal() {
                                 </form>
                             </div>
                         </div>
-                        <div class="overflow-x-auto">
+                        <div class="overflow-x-auto px-2">
                             <table class="w-full text-sm text-left text-gray-500">
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                                     <tr>
+                                        <th scope="col" class=" border">No.</th>
                                         <th scope="col" class="px-4 py-3 border">Tanggal</th>
                                         <th scope="col" class="px-4 py-3 border">Kode</th>
                                         <th scope="col" class="px-4 py-3 border">Kas Masuk</th>
@@ -193,7 +194,9 @@ function CariTanggal() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="item in kas.data" class="border-b ">
+                                    <tr v-for="(item,index) in kas.data" class="border-b ">
+                                        <th class="border text-center">{{ (kas.current_page - 1) * kas.per_page + index+1 }}.</th>
+
                                         <th scope="row"
                                             class="px-2 py-1 border font-medium text-gray-900 whitespace-nowrap text-start ">
                                             {{ item.tanggal }}</th>
