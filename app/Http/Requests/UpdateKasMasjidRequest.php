@@ -26,8 +26,8 @@ class UpdateKasMasjidRequest extends FormRequest
             'tanggal'=> 'required|date',
             'kas_masuk'=> 'required|numeric',
             'kas_keluar'=> 'required|numeric',
-            'ket_kas_masuk'=> 'required|string|max:100',
-            'ket_kas_keluar'=> 'required|string|max:100',
+            'ket_kas_masuk'=> 'nullable|string|max:100',
+            'ket_kas_keluar'=> 'nullable|string|max:100',
             'total_kas'=> 'required|numeric',
         ];
     }

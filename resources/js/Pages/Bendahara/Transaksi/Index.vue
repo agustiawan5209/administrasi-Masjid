@@ -2,13 +2,15 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import { defineProps, ref ,watch} from 'vue';
+import { defineProps, ref, watch } from 'vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import Modal from '@/Components/Modal.vue';
 import Pagination from '@/Components/Pagination.vue';
 import FlashMessage from '@/Components/FlashMessage.vue';
-
+import TextInput from '@/Components/TextInput.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import SelectInput from '@/Components/SelectInput.vue';
 const props = defineProps({
     kas: {
         type: Object,
@@ -21,10 +23,13 @@ const props = defineProps({
 const SearchForm = useForm({});
 const search = ref(props.search);
 
-watch(search, (value)=>{
+watch(search, (value) => {
     SearchForm.get(route('KasMasjid.index', {
         search: value,
-    }));
+    }), {
+        preserveState: true,
+        preserveScroll: true,
+    });
 })
 
 
@@ -44,11 +49,11 @@ const FormDelete = useForm({
     slug: null,
 });
 function deleteJadwal() {
-    FormDelete.delete(route('KasMasjid.delete'),{
-        onSuccess:()=>{
-            modalDelete.value=false;
+    FormDelete.delete(route('KasMasjid.delete'), {
+        onSuccess: () => {
+            modalDelete.value = false;
             FormDelete.reset()
-        }
+        },
     })
 }
 const rupiah = (number) => {
@@ -56,6 +61,40 @@ const rupiah = (number) => {
         style: "currency",
         currency: "IDR"
     }).format(number);
+}
+
+const FilterDateVar = ref(false)
+const FormTanggal = useForm({
+    max_date: '',
+    min_date: '',
+})
+const VarBulan = ref('');
+const MontForm = useForm({})
+watch(VarBulan, (value) => {
+    MontForm.get(route('KasMasjid.index',{month:value}),{
+        preserveState:true,
+    })
+})
+const Bulan = [
+    { no: '01', bulan: 'Januari' },
+    { no: '02', bulan: 'Februari' },
+    { no: '03', bulan: 'Maret' },
+    { no: '04', bulan: 'April' },
+    { no: '05', bulan: 'Mei' },
+    { no: '06', bulan: 'Juni' },
+    { no: '07', bulan: 'Juli' },
+    { no: '08', bulan: 'Agustus' },
+    { no: '09', bulan: 'September' },
+    { no: '10', bulan: 'Oktober' },
+    { no: '11', bulan: 'November' },
+    { no: '12', bulan: 'Desember' },
+];
+
+function CariTanggal() {
+    FormTanggal.get(route("KasMasjid.index"), {
+        preserveState: true,
+        preserveScroll: true,
+    })
 }
 </script>
 
@@ -76,7 +115,7 @@ const rupiah = (number) => {
                         <div
                             class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                             <div class="w-full">
-                               <h6>Total Kas : <span>{{rupiah(total_saldo)}}</span></h6>
+                                <h6>Total Kas : <span>{{ rupiah(total_saldo) }}</span></h6>
                             </div>
                             <div class="w-full md:w-1/2">
                                 <form class="flex items-center">
@@ -102,8 +141,34 @@ const rupiah = (number) => {
                                 <PrimaryButton>Tambah</PrimaryButton>
                                 </Link>
                                 <div class="flex items-center space-x-3 w-full md:w-auto">
+                                    <PrimaryButton class="capitalize" @click="FilterDateVar = !FilterDateVar">Filter <svg
+                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 transition-all"
+                                            :class="FilterDateVar ? 'rotate-90' : 'rotate-0'">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                                        </svg>
+                                    </PrimaryButton>
 
                                 </div>
+                            </div>
+                        </div>
+                        <div v-show="FilterDateVar"
+                            class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                            <div class="w-max">
+                                <form class="flex justify-around items-end gap-2">
+                                    <div>
+                                        <InputLabel value="Tanggal Awal" />
+                                        <TextInput type="date" v-model="FormTanggal.max_date" />
+                                    </div>
+                                    <div>
+                                        <InputLabel value="Tanggal Akhir" />
+                                        <TextInput type="date" v-model="FormTanggal.min_date" />
+                                    </div>
+                                    <div class="flex items-start h-full">
+                                        <PrimaryButton type="button" @click="CariTanggal">Cari</PrimaryButton>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                         <div class="overflow-x-auto">
@@ -118,6 +183,11 @@ const rupiah = (number) => {
                                         <th scope="col" class="px-4 py-3 border text-xs">Keterangan Kas Keluar</th>
                                         <th scope="col" class="px-4 py-3 border">Total Kas</th>
                                         <th scope="col" class="px-4 py-3 border">
+                                            <select v-model="VarBulan"
+                                                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm placeholder:text-gray-300 w-full block text-sm text-gray-600">
+                                                <option value="">--Pilih Bulan--</option>
+                                                <option v-for="M in Bulan" :value="M.no">{{ M.bulan }}</option>
+                                            </select>
                                             <span class="sr-only">Actions</span>
                                         </th>
                                     </tr>
@@ -155,10 +225,12 @@ const rupiah = (number) => {
                                                 </template>
 
                                                 <template #content>
-                                                    <DropdownLink class="bg-green-500 hover:bg-green-600 active:bg-green-400 text-white"
+                                                    <DropdownLink
+                                                        class="bg-green-500 hover:bg-green-600 active:bg-green-400 text-white"
                                                         :href="route('KasMasjid.edit', { nama: item.nama, slug: item.id, alamat: item.alamat, })">
                                                         Edit </DropdownLink>
-                                                    <PrimaryButton type="button" class="bg-error text-white hover:bg-red-600 active:bg-red-400 w-full block"
+                                                    <PrimaryButton type="button"
+                                                        class="bg-error text-white hover:bg-red-600 active:bg-red-400 w-full block"
                                                         @click="showModaldelete(item.id)">
                                                         Hapus
                                                     </PrimaryButton>
@@ -178,7 +250,8 @@ const rupiah = (number) => {
                     <div class="block bg-white rounded-lg py-5">
                         <h3 class="mb-4">Apakah Anda Yakin?</h3>
                         <div class="flex justify-around">
-                            <PrimaryButton type="button" @click="deleteJadwal()" class="bg-blue-500 hover:bg-blue-600 active:bg-blue-800">Ya
+                            <PrimaryButton type="button" @click="deleteJadwal()"
+                                class="bg-blue-500 hover:bg-blue-600 active:bg-blue-800">Ya
                             </PrimaryButton>
                             <PrimaryButton type="button" @click="closeModal()"
                                 class="bg-error hover:bg-red-600 active:bg-red-800">Batal</PrimaryButton>

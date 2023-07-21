@@ -30,12 +30,23 @@ class KasMasjid extends Model
             $query->where('kode', 'like', '%' . $search . '%')
                 ->orWhere('ket_kas_masuk', 'like', '%' . $search . '%')
                 ->orWhere('ket_kas_keluar', 'like', '%' . $search . '%');
-        })
-            ->when($filter['high_kas'] ?? null, function ($query) {
-                $query->orderBy('total_kas', 'desc');
-            })
-            ->when($filter['low_kas'] ?? null, function ($query) {
-                $query->orderBy('total_kas', 'asc');
-            });
+        })->when($filter['high_kas'] ?? null, function ($query) {
+            $query->orderBy('total_kas', 'desc');
+        })->when($filter['low_kas'] ?? null, function ($query) {
+            $query->orderBy('total_kas', 'asc');
+        });
+    }
+
+    public function scopeDateFilter($query,$filter = [])
+    {
+        $query->when($filter['max_date'] ?? null && $filter['min_date'] ?? null, function($query) use($filter){
+            $query->whereBetween('tanggal', [$filter['max_date'],$filter['min_date']]);
+        });
+    }
+    public function scopeMonthFilter($query,$month)
+    {
+        $query->when($month ?? null, function($query) use($month){
+            $query->whereMonth('tanggal', $month);
+        });
     }
 }
