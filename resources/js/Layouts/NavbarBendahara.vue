@@ -8,7 +8,7 @@ import NavLink from '@/Components/NavLink.vue';
         <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
             Dashboard
         </NavLink>
-        <NavLink :href="route('Donatur.index')" :active="route().current('Donatur.index') || route().current('Donatur.create') || route().current('Donatur.edit')">
+        <NavLink :href="route('DataDonatur.index')" :active="route().current('DataDonatur.index') || route().current('DataDonatur.create') || route().current('DataDonatur.edit')">
             Data Donatur
         </NavLink>
         <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
