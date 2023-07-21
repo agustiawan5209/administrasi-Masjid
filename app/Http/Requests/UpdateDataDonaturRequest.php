@@ -28,7 +28,7 @@ class UpdateDataDonaturRequest extends FormRequest
             'nama_donatur' => 'required|string|max:100',
             'jenis' => 'required|string|max:100',
             'jumlah' => 'required|string|max:50',
-            'bukti' => 'required|image|max:1020',
+            'bukti' => 'nullable|image|max:1020',
             'tanggal' => 'required|date',
             'ket' => 'required|string',
         ];
