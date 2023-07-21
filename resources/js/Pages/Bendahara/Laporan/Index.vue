@@ -11,6 +11,7 @@ import FlashMessage from '@/Components/FlashMessage.vue';
 import TextInput from '@/Components/TextInput.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import SelectInput from '@/Components/SelectInput.vue';
+import axios from 'axios';
 const props = defineProps({
     kas: {
         type: Object,
@@ -64,6 +65,35 @@ function CariTanggal() {
         preserveScroll: true,
     })
 }
+let config = {
+    responseType: 'blob',
+}
+function exportExcel(){
+    axios.get(route('Laporan.keuangan-Export-Excel',{
+        max_date: FormTanggal.max_date,
+        min_date: FormTanggal.min_date,
+    }), config).then((res)=>{
+       var fileExcel = URL.createObjectURL(new Blob([res.data]));
+       var fileLink = document.createElement('a');
+       fileLink.href  = fileExcel;
+       fileLink.setAttribute('download', 'kasMasjid.xlsx')
+    //    document.body.appendChild(fileLink);
+       fileLink.click()
+    }).catch(err=>console.log(err))
+}
+function exportPDF(){
+    axios.get(route('Laporan.keuangan-Export-PDF',{
+        max_date: FormTanggal.max_date,
+        min_date: FormTanggal.min_date,
+    }), config).then((res)=>{
+       var fileExcel = URL.createObjectURL(new Blob([res.data]));
+       var fileLink = document.createElement('a');
+       fileLink.href  = fileExcel;
+       fileLink.setAttribute('download', 'kasMasjid.pdf')
+    //    document.body.appendChild(fileLink);
+       fileLink.click()
+    }).catch(err=>console.log(err))
+}
 </script>
 
 <template>
@@ -102,15 +132,18 @@ function CariTanggal() {
                                 </form>
                             </div>
                             <div class="flex flex-wrap gap-2">
-                                <PrimaryButton type="button" class=" bg-transparent border-red-600 text-red-500 active:text-red-800 hover:bg-transparent focus:bg-transparent active:bg-transparent focus:ring-trabg-transparent">
+                                <PrimaryButton @click="exportPDF()" type="button" class=" bg-transparent border-red-600 text-red-500 active:text-red-800 hover:bg-transparent focus:bg-transparent active:bg-transparent focus:ring-trabg-transparent">
                                     <span>PDF</span>
                                     <img :src="'/svg/pdf-file.svg'" alt="" class="w-6 h-6">
 
                                 </PrimaryButton>
-                                <PrimaryButton type="button" class="bg-transparent border-green-600 text-green-500 active:text-green-800 hover:bg-transparent focus:bg-transparent active:bg-transparent focus:ring-trabg-transparent">
+                                <PrimaryButton @click="exportExcel()" type="button" class="bg-transparent border-green-600 text-green-500 active:text-green-800 hover:bg-transparent focus:bg-transparent active:bg-transparent focus:ring-trabg-transparent">
                                     <span>Excel</span>
                                     <img :src="'/svg/excel-document.svg'" alt="" class="w-6 h-6">
                                 </PrimaryButton>
+                                <!-- <Link :href="route('Laporan.keuangan-Export-Excel')">
+                                </Link> -->
+
                             </div>
                         </div>
                         <div class="overflow-x-auto px-2 pb-5">

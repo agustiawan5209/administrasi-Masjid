@@ -50,6 +50,8 @@ Route::middleware(['auth', 'role:bendahara'])->group(function () {
     Route::group(['prefix' => 'Laporan', 'as' => 'Laporan.'], function () {
         Route::controller(LaporanController::class)->group(function () {
             Route::get('/keuangan', 'LaporanKeuangan')->name('keuangan-bendahara');
+            Route::get('Excel', 'generateLaporanKeuanganExcel')->name('keuangan-Export-Excel');
+            Route::get('PDF', 'generateLaporanKeuanganPDF')->name('keuangan-Export-PDF');
         });
     });
 

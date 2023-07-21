@@ -13,16 +13,16 @@ class KasMasjid extends Model
     protected $table = "kas_masjids";
     protected $fillable = ['kode', 'tanggal', 'kas_masuk', 'ket_kas_masuk', 'kas_keluar', 'ket_kas_keluar', 'total_kas'];
 
-    protected $appends = [
-        'total_saldo',
-    ];
+    // protected $appends = [
+    //     'total_saldo',
+    // ];
 
-    public function totalSaldo(): Attribute
-    {
-        return new Attribute(
-            get: fn () => $this->kas_masuk + $this->kas_keluar
-        );
-    }
+    // public function totalSaldo(): Attribute
+    // {
+    //     return new Attribute(
+    //         get: fn () => $this->kas_masuk - $this->kas_keluar
+    //     );
+    // }
 
     public function scopeFilter($query, $filter = [])
     {
