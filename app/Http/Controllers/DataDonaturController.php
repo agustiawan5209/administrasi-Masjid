@@ -17,9 +17,11 @@ class DataDonaturController extends Controller
      */
     public function index()
     {
+        $saldo = new SaldoDompetController();
         return Inertia::render("Bendahara/DataDonatur/Index", [
             'data_donatur' => DataDonatur::orderBy('id', 'desc')->with(['donatur'])->filter(Request::only('search'))->paginate(10),
             'search' => Request::input('search'),
+            'total_saldo'=> $saldo->getSaldoDonatur(),
         ]);
     }
 

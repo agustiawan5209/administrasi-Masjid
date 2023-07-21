@@ -15,6 +15,7 @@ const props = defineProps({
         default: () => ({}),
     },
     search: String,
+    total_saldo: Number,
 })
 // Search Form
 const SearchForm = useForm({});
@@ -26,7 +27,12 @@ watch(search, (value)=>{
     }));
 })
 
-
+const rupiah = (number) => {
+    return new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR"
+    }).format(number);
+}
 // Modal
 const modalDelete = ref(false);
 function showModaldelete(param) {
@@ -68,6 +74,9 @@ function deleteJadwal() {
                     <div class="bg-white relative shadow-md sm:rounded-lg overflow-hidden">
                         <div
                             class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                            <div class="w-full">
+                                <h6>Total : <span>{{ rupiah(total_saldo) }}</span></h6>
+                            </div>
                             <div class="w-full md:w-1/2">
                                 <form class="flex items-center">
                                     <label for="simple-search" class="sr-only">Search</label>
@@ -100,33 +109,33 @@ function deleteJadwal() {
                             <table class="w-full text-sm text-left text-gray-500">
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                                     <tr>
-                                        <th scope="col" class="px-4 py-3">Bukti</th>
-                                        <th scope="col" class="px-4 py-3">Nama</th>
-                                        <th scope="col" class="px-4 py-3">Jenis</th>
-                                        <th scope="col" class="px-4 py-3">Jumlah</th>
-                                        <th scope="col" class="px-4 py-3">Tanggal</th>
-                                        <th scope="col" class="px-4 py-3">Keterangan</th>
-                                        <th scope="col" class="px-4 py-3">
+                                        <th scope="col" class="px-4 py-3 border">Bukti</th>
+                                        <th scope="col" class="px-4 py-3 border">Nama</th>
+                                        <th scope="col" class="px-4 py-3 border">Jenis</th>
+                                        <th scope="col" class="px-4 py-3 border">Jumlah</th>
+                                        <th scope="col" class="px-4 py-3 border">Tanggal</th>
+                                        <th scope="col" class="px-4 py-3 border">Keterangan</th>
+                                        <th scope="col" class="px-4 py-3 border">
                                             <span class="sr-only">Actions</span>
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr v-for="item in data_donatur.data" class="border-b ">
-                                        <td class="px-4 py-3 w-32">
+                                        <td class="px-4 py-3 border w-32">
                                             <img :src="item.path_bukti" :alt="item.jenis" srcset="">
                                         </td>
 
                                         <th scope="row"
-                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap text-start ">
+                                            class="px-4 py-3 border font-medium text-gray-900 whitespace-nowrap text-start ">
                                             {{ item.nama_donatur }}</th>
-                                        <td class="px-4 py-3">{{ item.jenis }}</td>
-                                        <td class="px-4 py-3">{{ item.jumlah }}</td>
-                                        <td class="px-4 py-3">{{ item.tanggal }}</td>
-                                        <td class="px-4 py-3">
+                                        <td class="px-4 py-3 border">{{ item.jenis }}</td>
+                                        <td class="px-4 py-3 border">{{ rupiah(item.jumlah) }}</td>
+                                        <td class="px-4 py-3 border">{{ item.tanggal }}</td>
+                                        <td class="px-4 py-3 border">
                                             <p v-html="item.ket"></p>
                                         </td>
-                                        <td class="px-4 py-3 flex items-center justify-start">
+                                        <td class="px-4 py-3 border ">
                                             <Dropdown align="top" width="48">
                                                 <template #trigger>
                                                     <span class="inline-flex rounded-md">
@@ -145,7 +154,7 @@ function deleteJadwal() {
                                                     <DropdownLink class="bg-green-500 hover:bg-green-600 active:bg-green-400 text-white"
                                                         :href="route('DataDonatur.edit', { nama: item.nama, slug: item.id, alamat: item.alamat, })">
                                                         Edit </DropdownLink>
-                                                    <PrimaryButton type="button" class="!bg-error text-white hover:bg-red-600 active:bg-red-400 w-full block"
+                                                    <PrimaryButton type="button" class="!bg-error px-1 py-1 text-xs text-white hover:bg-red-600 active:bg-red-400 w-full block"
                                                         @click="showModaldelete(item.id)">
                                                         Hapus
                                                     </PrimaryButton>
