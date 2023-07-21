@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('saldo_dompets', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('saldo_masuk')->nullable();
+            $table->bigInteger('saldo_keluar')->nullable();
+            $table->bigInteger('total_saldo');
             $table->timestamps();
         });
     }

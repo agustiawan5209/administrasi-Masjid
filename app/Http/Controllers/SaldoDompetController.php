@@ -2,64 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KasMasjid;
 use App\Models\SaldoDompet;
 use Illuminate\Http\Request;
 
 class SaldoDompetController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function getSaldo()
     {
-        //
+        $saldo = SaldoDompet::latest()->first();
+        if ($saldo == null) {
+            $saldo = 0;
+        } else {
+            $saldo = SaldoDompet::latest()->first()->total_saldo;
+        }
+        return $saldo;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store($kas_masuk, $kas_keluar)
     {
-        //
+        $total_saldo = KasMasjid::sum('total_kas');
+        SaldoDompet::create([
+            'saldo_masuk' => $kas_masuk,
+            'saldo_keluar' => $kas_keluar,
+            'total_saldo' => $total_saldo,
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function deleteKas($kas_masuk, $kas_keluar, $kas_masjid)
     {
-        //
-    }
+        $saldo = $this->getSaldo();
+        if ($saldo < 1) {
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(SaldoDompet $saldoDompet)
-    {
-        //
-    }
+            $total_saldo = 0;
+        } else {
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(SaldoDompet $saldoDompet)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, SaldoDompet $saldoDompet)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(SaldoDompet $saldoDompet)
-    {
-        //
+            $total_saldo = intval($saldo - $kas_masjid);
+        }
+        SaldoDompet::create([
+            'saldo_masuk' => $kas_masuk,
+            'saldo_keluar' => $kas_keluar,
+            'total_saldo' => $total_saldo,
+        ]);
     }
 }

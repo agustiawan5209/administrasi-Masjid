@@ -10,18 +10,19 @@ import Pagination from '@/Components/Pagination.vue';
 import FlashMessage from '@/Components/FlashMessage.vue';
 
 const props = defineProps({
-    donatur: {
+    kas: {
         type: Object,
         default: () => ({}),
     },
     search: String,
+    total_saldo: Number
 })
 // Search Form
 const SearchForm = useForm({});
 const search = ref(props.search);
 
 watch(search, (value)=>{
-    SearchForm.get(route('Donatur.index', {
+    SearchForm.get(route('KasMasjid.index', {
         search: value,
     }));
 })
@@ -43,12 +44,18 @@ const FormDelete = useForm({
     slug: null,
 });
 function deleteJadwal() {
-    FormDelete.delete(route('Donatur.delete'),{
+    FormDelete.delete(route('KasMasjid.delete'),{
         onSuccess:()=>{
             modalDelete.value=false;
             FormDelete.reset()
         }
     })
+}
+const rupiah = (number) => {
+    return new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR"
+    }).format(number);
 }
 </script>
 
@@ -68,6 +75,9 @@ function deleteJadwal() {
                     <div class="bg-white relative shadow-md sm:rounded-lg overflow-hidden">
                         <div
                             class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                            <div class="w-full">
+                               <h6>Total Kas : <span>{{rupiah(total_saldo)}}</span></h6>
+                            </div>
                             <div class="w-full md:w-1/2">
                                 <form class="flex items-center">
                                     <label for="simple-search" class="sr-only">Search</label>
@@ -88,7 +98,7 @@ function deleteJadwal() {
                             </div>
                             <div
                                 class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                                <Link :href="route('Donatur.create')">
+                                <Link :href="route('KasMasjid.create')">
                                 <PrimaryButton>Tambah</PrimaryButton>
                                 </Link>
                                 <div class="flex items-center space-x-3 w-full md:w-auto">
@@ -96,26 +106,40 @@ function deleteJadwal() {
                                 </div>
                             </div>
                         </div>
-                        <div class="">
+                        <div class="overflow-x-auto">
                             <table class="w-full text-sm text-left text-gray-500">
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                                     <tr>
-                                        <th scope="col" class="px-4 py-3">Nama</th>
-                                        <th scope="col" class="px-4 py-3">Alamat</th>
-                                        <th scope="col" class="px-4 py-3">No. Telpon</th>
-                                        <th scope="col" class="px-4 py-3">
+                                        <th scope="col" class="px-4 py-3 border">Tanggal</th>
+                                        <th scope="col" class="px-4 py-3 border">Kode</th>
+                                        <th scope="col" class="px-4 py-3 border">Kas Masuk</th>
+                                        <th scope="col" class="px-4 py-3 border text-xs">Keterangan Kas Masuk</th>
+                                        <th scope="col" class="px-4 py-3 border">Kas Keluar</th>
+                                        <th scope="col" class="px-4 py-3 border text-xs">Keterangan Kas Keluar</th>
+                                        <th scope="col" class="px-4 py-3 border">Total Kas</th>
+                                        <th scope="col" class="px-4 py-3 border">
                                             <span class="sr-only">Actions</span>
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="item in donatur.data" class="border-b ">
+                                    <tr v-for="item in kas.data" class="border-b ">
                                         <th scope="row"
-                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap text-start ">
-                                            {{ item.nama }}</th>
-                                        <td class="px-4 py-3">{{ item.alamat }}</td>
-                                        <td class="px-4 py-3">{{ item.no_telpon }}</td>
-                                        <td class="px-4 py-3 flex items-center justify-start">
+                                            class="px-2 py-1 border font-medium text-gray-900 whitespace-nowrap text-start ">
+                                            {{ item.tanggal }}</th>
+                                        <th scope="row"
+                                            class="px-2 py-1 border font-medium text-gray-900 whitespace-nowrap text-start ">
+                                            {{ item.kode }}</th>
+                                        <td class="px-2 py-1 border">{{ rupiah(item.kas_masuk) }}</td>
+                                        <td class="px-2 py-1 border w-1/12">
+                                            <p class="text-xs whitespace-pre-wrap" v-html="item.ket_kas_masuk"></p>
+                                        </td>
+                                        <td class="px-2 py-1 border">{{ rupiah(item.kas_keluar) }}</td>
+                                        <td class="px-2 py-1 border w-1/12">
+                                            <p class="text-xs whitespace-pre-wrap" v-html="item.ket_kas_keluar"></p>
+                                        </td>
+                                        <td class="px-2 py-1 border">{{ rupiah(item.total_kas) }}</td>
+                                        <td class="px-2 py-1 border flex items-center justify-start">
                                             <Dropdown align="top" width="48">
                                                 <template #trigger>
                                                     <span class="inline-flex rounded-md">
@@ -132,7 +156,7 @@ function deleteJadwal() {
 
                                                 <template #content>
                                                     <DropdownLink class="bg-green-500 hover:bg-green-600 active:bg-green-400 text-white"
-                                                        :href="route('Donatur.edit', { nama: item.nama, slug: item.id, alamat: item.alamat, })">
+                                                        :href="route('KasMasjid.edit', { nama: item.nama, slug: item.id, alamat: item.alamat, })">
                                                         Edit </DropdownLink>
                                                     <PrimaryButton type="button" class="bg-error text-white hover:bg-red-600 active:bg-red-400 w-full block"
                                                         @click="showModaldelete(item.id)">
@@ -145,7 +169,7 @@ function deleteJadwal() {
                                 </tbody>
                             </table>
                         </div>
-                        <Pagination :links="donatur.links" />
+                        <Pagination :links="kas.links" />
                     </div>
                 </div>
             </section>

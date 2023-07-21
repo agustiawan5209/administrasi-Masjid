@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class SaldoDompet extends Model
 {
     use HasFactory;
+
+    protected $table = 'saldo_dompets';
+    protected $fillable = ['saldo_masuk', 'saldo_keluar', 'total_saldo'];
 }

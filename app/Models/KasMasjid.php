@@ -11,7 +11,7 @@ class KasMasjid extends Model
     use HasFactory;
 
     protected $table = "kas_masjids";
-    protected $fillable = ['kode','tanggal', 'kas_masuk', 'ket_kas_masuk', 'kas_keluar', 'ket_kas_keluar', 'total_kas'];
+    protected $fillable = ['kode', 'tanggal', 'kas_masuk', 'ket_kas_masuk', 'kas_keluar', 'ket_kas_keluar', 'total_kas'];
 
     protected $appends = [
         'total_saldo',
@@ -31,8 +31,11 @@ class KasMasjid extends Model
                 ->orWhere('ket_kas_masuk', 'like', '%' . $search . '%')
                 ->orWhere('ket_kas_keluar', 'like', '%' . $search . '%');
         })
-            ->when($filter['high_kas'] || $filter['low_kas'] ?? null, function ($query, $high_kas, $low_kas) {
-                $query->whereBetween('total_kas', [$high_kas, $low_kas]);
+            ->when($filter['high_kas'] ?? null, function ($query) {
+                $query->orderBy('total_kas', 'desc');
+            })
+            ->when($filter['low_kas'] ?? null, function ($query) {
+                $query->orderBy('total_kas', 'asc');
             });
     }
 }
