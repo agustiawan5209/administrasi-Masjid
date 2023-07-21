@@ -36,7 +36,7 @@ function fileSelected(e) {
     UrlFile.value = URL.createObjectURL(e.target.files[0])
 }
 function submit() {
-    AddForm.post(route('DataDonatur.store'), {
+    AddForm.post(route('DataDonatur.update', {slug:props.data_donatur.id}), {
         onSuccess: () => {
             AddForm.reset()
         }
@@ -54,6 +54,7 @@ function DonaturSelected(e) {
         AddForm.nama_donatur = data.nama;
     }).catch(err=>console.log(err))
  }
+ const JenisDataDonatur = ['Uang', 'Materi','Lainnya'];
 
 </script>
 
@@ -110,7 +111,10 @@ function DonaturSelected(e) {
                     </div>
                     <div class="w-full mb-2">
                         <InputLabel value="jenis Donatur" />
-                        <TextInput type="text" v-model="AddForm.jenis" />
+                        <select class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm placeholder:text-gray-300 w-full"  v-model="AddForm.jenis" >
+                            <option value="">---</option>
+                            <option v-for="je in JenisDataDonatur" :value="je">{{je}}</option>
+                        </select>
                         <InputError :message="AddForm.errors.jenis" />
                     </div>
                     <div class="w-full mb-2">
