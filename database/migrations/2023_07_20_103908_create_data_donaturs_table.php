@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('data_donaturs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('donatur_id')->constrained('donaturs');
+            $table->foreignId('donatur_id')->nullable();
             $table->string('nama_donatur',100);
-            $table->string('jenis',100);
+            $table->enum('jenis',['Uang', 'Materi','Lainnya']);
             $table->string('jumlah',100);
             $table->string('bukti',100);
             $table->date('tanggal');
