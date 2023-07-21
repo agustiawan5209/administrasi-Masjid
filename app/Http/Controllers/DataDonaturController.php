@@ -39,19 +39,17 @@ class DataDonaturController extends Controller
      */
     public function store(StoreDataDonaturRequest $request)
     {
-        try {
-            $bukti = $request->file('bukti');
-            $nama = md5($bukti->getClientOriginalName()) . '.' . $bukti->getClientOriginalExtension();
-            $collect = $request->all();
-            $collect['bukti'] = $nama;
+        $bukti = $request->file('bukti');
+        $nama = md5($bukti->getClientOriginalName()) . '.' . $bukti->getClientOriginalExtension();
+        $collect = $request->all();
+        $collect['bukti'] = $nama;
 
-            $bukti->storeAs('public', 'buktidanadonatur/' . $nama);
+        $bukti->storeAs('public', 'buktidanadonatur/' . $nama);
 
-            DataDonatur::create($collect);
-            return redirect()->route('DataDonatur.index')->with('success', 'Berhasil Di Tambah');
-        } catch (\Throwable $th) {
-            return redirect()->route('DataDonatur.index')->with('errors', $th->getMessage());
-        }
+       $danadonatur= DataDonatur::create($collect);
+       $saldo = new SaldoDompetController();
+       $saldo->storeDonatur($danadonatur->jumlah,0);
+        return redirect()->route('DataDonatur.index')->with('success', 'Berhasil Di Tambah');
     }
 
     /**
@@ -87,24 +85,23 @@ class DataDonaturController extends Controller
      */
     public function update(UpdateDataDonaturRequest $request, DataDonatur $danadonatur)
     {
-        try {
-            $bukti_file = $danadonatur->find($request->slug)->bukti;
+        $bukti_file = $danadonatur->find($request->slug)->bukti;
+        $collect = $request->all();
+        if ($request->file('bukti') !== null) {
+            $this->imageDelete($bukti_file);
+            $bukti = $request->file('bukti');
+            $nama = md5($bukti->getClientOriginalName()) . '.' . $bukti->getClientOriginalExtension();
             $collect = $request->all();
-            if ($request->file('bukti') !== null) {
-                $this->imageDelete($bukti_file);
-                $bukti = $request->file('bukti');
-                $nama = md5($bukti->getClientOriginalName()) . '.' . $bukti->getClientOriginalExtension();
-                $collect = $request->all();
-                $collect['bukti'] = $nama;
-            } else {
-                $collect = $request->all();
-                $collect['bukti'] = $bukti_file;
-            }
-            $danadonatur->find($request->slug)->update($request->all());
-            return redirect()->route('DataDonatur.index')->with('success', 'Berhasil Di Edit');
-        } catch (\Throwable $th) {
-            return redirect()->route('DataDonatur.index')->with('errors', $th->getMessage());
+            $collect['bukti'] = $nama;
+        } else {
+            $collect = $request->all();
+            $collect['bukti'] = $bukti_file;
         }
+        // dd($collect);
+        $danadonatur = DataDonatur::find($request->slug)->update($collect);
+        $saldo = new SaldoDompetController();
+        $saldo->storeDonatur($danadonatur->jumlah,0);
+        return redirect()->route('DataDonatur.index')->with('success', 'Berhasil Di Edit');
     }
     private function imageDelete($item)
     {
@@ -120,10 +117,20 @@ class DataDonaturController extends Controller
     public function delete(DataDonatur $danadonatur)
     {
         try {
+            // Find Dana Doantur
             $danadonatur = $danadonatur->find(Request::input('slug'));
+            // Find Foto By ID
             $foto_artikel = $danadonatur->foto;
+
+            // Delete Image
             $this->imageDelete($foto_artikel);
+            // Delete Data Donatur
             $danadonatur->delete();
+
+            // Delete Saldo Donatur;
+            $saldo = new SaldoDompetController();
+            $saldo->deleteSaldoDonatur($danadonatur->jumlah,0, $danadonatur->jumlah);
+
             return redirect()->route('DataDonatur.index')->with('success', 'Berhasil Di Hapus');
         } catch (\Throwable $th) {
             return redirect()->route('DataDonatur.index')->with('errors', $th->getMessage());
