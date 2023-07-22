@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('struktur_organisasis', function (Blueprint $table) {
             $table->id();
+            $table->string('gambar',100);
+            $table->string('nama',100);
             $table->timestamps();
         });
     }
