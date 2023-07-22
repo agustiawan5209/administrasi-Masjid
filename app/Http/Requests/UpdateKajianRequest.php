@@ -26,6 +26,7 @@ class UpdateKajianRequest extends FormRequest
             'judul'=> 'required|string|max:100',
             'uztadz'=> 'required|string|max:100',
             'tanggal'=> 'required|date',
+            'waktu'=> 'required|string|max:100',
             'ket'=> 'required|string',
             'penanggung_jawab'=> 'required|string|max:100',
 

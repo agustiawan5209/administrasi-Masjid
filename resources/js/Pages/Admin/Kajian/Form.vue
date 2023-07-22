@@ -14,6 +14,7 @@ const AddForm = useForm({
     judul: '',
     uztadz: '',
     ket: '',
+    waktu:'',
     penanggung_jawab: '',
 })
 
@@ -40,6 +41,11 @@ function submit() {
                         <InputLabel value="Tanggal Kajian" />
                         <TextInput type="date" id="tanggal" v-model="AddForm.tanggal" />
                         <InputError :message="AddForm.errors.tanggal"  />
+                    </div>
+                    <div class="block">
+                        <InputLabel value="Waktu Kajian" />
+                        <TextInput type="text" id="waktu" v-model="AddForm.waktu" />
+                        <InputError :message="AddForm.errors.waktu"  />
                     </div>
                     <div class="block">
                         <InputLabel value="judul Kajian" />

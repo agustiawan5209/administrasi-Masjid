@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('kajians', function (Blueprint $table) {
             $table->id();
-            $table->string('judul');
-            $table->string('uztadz');
+            $table->string('judul',100);
+            $table->string('uztadz',100);
+            $table->string('waktu',100);
             $table->date('tanggal');
             $table->longText('ket');
-            $table->string('penanggung_jawab');
+            $table->string('penanggung_jawab',100);
             $table->timestamps();
         });
     }

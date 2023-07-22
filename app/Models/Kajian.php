@@ -10,7 +10,7 @@ class Kajian extends Model
     use HasFactory;
 
     protected $table = 'kajians';
-    protected $fillable = ['judul', 'uztadz', 'tanggal', 'ket', 'penanggung_jawab'];
+    protected $fillable = ['judul', 'uztadz', 'tanggal','waktu', 'ket', 'penanggung_jawab'];
 
     public function scopeFilter($query, $filter = [])
     {

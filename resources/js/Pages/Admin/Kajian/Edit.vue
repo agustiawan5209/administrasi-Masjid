@@ -19,6 +19,7 @@ const AddForm = useForm({
     judul: props.kajian.judul,
     uztadz: props.kajian.uztadz,
     ket: props.kajian.ket,
+    waktu: props.kajian.waktu,
     penanggung_jawab: props.kajian.penanggung_jawab,
 })
 
@@ -41,6 +42,11 @@ function submit() {
                         <InputLabel value="Tanggal Kajian" />
                         <TextInput type="date" v-model="AddForm.tanggal" placeholder="18/19/2023" />
                         <InputError :message="AddForm.errors.tanggal"  />
+                    </div>
+                    <div class="block">
+                        <InputLabel value="Waktu Kajian" />
+                        <TextInput type="text" id="waktu" v-model="AddForm.waktu" />
+                        <InputError :message="AddForm.errors.waktu"  />
                     </div>
                     <div class="block">
                         <InputLabel value="judul Kajian" />
