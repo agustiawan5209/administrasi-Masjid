@@ -1,7 +1,8 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue'
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import CarouselHeader from '@/Components/CarouselHeader.vue'
 </script>
 
 <template>
@@ -21,24 +22,30 @@ import PrimaryButton from '@/Components/PrimaryButton.vue'
     <nav class="bg-base-100 flex flex-wrap sm:flex-row items-center justify-between md:pr-10">
         <ul class="flex flex-wrap sm:flex-row md:space-x-6  md:pl-10 border-b-2 border-base-100">
             <li class="list-none group hover:bg-white py-3 border-black px-2 cursor-pointer">
-                <a href="#" class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Home</a>
+                <a href="#"
+                    class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Home</a>
             </li>
             <li class="list-none group hover:bg-white py-3 border-black px-2 cursor-pointer">
-                <a href="#" class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Struktur
+                <a href="#"
+                    class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Struktur
                     Organisasi</a>
             </li>
             <li class="list-none group hover:bg-white py-3 border-black px-2 cursor-pointer">
-                <a href="#" class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Tentang</a>
+                <a href="#"
+                    class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Tentang</a>
             </li>
             <li class="list-none group hover:bg-white py-3 border-black px-2 cursor-pointer">
-                <a href="#" class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Pengumuman</a>
+                <a href="#"
+                    class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Pengumuman</a>
             </li>
             <li class="list-none group hover:bg-white py-3 border-black px-2 cursor-pointer">
-                <a href="#" class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Jadwal
+                <a href="#"
+                    class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Jadwal
                     Kegiatan</a>
             </li>
             <li class="list-none group hover:bg-white py-3 border-black px-2 cursor-pointer">
-                <a href="#" class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Kajian</a>
+                <a href="#"
+                    class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Kajian</a>
             </li>
         </ul>
         <form action="#" class="flex flex-row gap-0">
@@ -46,4 +53,76 @@ import PrimaryButton from '@/Components/PrimaryButton.vue'
             <PrimaryButton class="border-none bg-primary px-2 py-2 rounded-l-none text-xs">Cari</PrimaryButton>
         </form>
     </nav>
+
+    <main>
+        <!-- Carousel Header -->
+        <section class="carousel-header flex flex-1 justify-between w-full relative overflow-hidden">
+            <div
+                class=" w-full md:w-1/2  h-full absolute flex flex-col justify-start items-center z-20 bg-transparent overflow-hidden">
+                <div class="w-full h-full relative overflow-hidden flex flex-col items-center justify-center">
+                    <div class="absolute w-full h-full bg-black opacity-30 z-20 top-0"></div>
+                    <h1 class="text-2xl font-bold text-white mb-5 sm:mb-10 md:mb-20 z-50 drop-shadow-lg">Jadwal Shalat Hari
+                        Ini</h1>
+                    <ul class="grid grid-cols-5 bg-transparent px-5 w-full z-50">
+                        <li
+                            class=" bg-primary border-r border-l border-white py-2 text-center text-xs sm:text-sm md:text-base lg:text-lg">
+                            <dl>
+                                <dt class="text-base-100 font-bold text-base">Subuh</dt>
+                                <dd class="text-black text-sm">04:00 WITA</dd>
+                            </dl>
+                        </li>
+                        <li
+                            class=" bg-primary border-r border-l border-white py-2 text-center text-xs sm:text-sm md:text-base lg:text-lg">
+                            <dl>
+                                <dt class="text-base-100 font-bold text-base">Dzuhur</dt>
+                                <dd class="text-black text-sm">04:00 WITA</dd>
+                            </dl>
+                        </li>
+                        <li
+                            class=" bg-primary border-r border-l border-white py-2 text-center text-xs sm:text-sm md:text-base lg:text-lg">
+                            <dl>
+                                <dt class="text-base-100 font-bold text-base">Azhar</dt>
+                                <dd class="text-black text-sm">04:00 WITA</dd>
+                            </dl>
+                        </li>
+                        <li
+                            class=" bg-primary border-r border-l border-white py-2 text-center text-xs sm:text-sm md:text-base lg:text-lg">
+                            <dl>
+                                <dt class="text-base-100 font-bold text-base">Maghrib</dt>
+                                <dd class="text-black text-sm">04:00 WITA</dd>
+                            </dl>
+                        </li>
+                        <li
+                            class=" bg-primary border-r border-l border-white py-2 text-center text-xs sm:text-sm md:text-base lg:text-lg">
+                            <dl>
+                                <dt class="text-base-100 font-bold text-base">Isya</dt>
+                                <dd class="text-black text-sm">04:00 WITA</dd>
+                            </dl>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="w-full h-full">
+                <CarouselHeader />
+            </div>
+        </section>
+
+        <!-- Card -->
+        <section class="container mx-auto grid grid-cols-12 place-content-start">
+
+        </section>
+    </main>
 </template>
+
+<style>
+.carousel-header {
+    height: 500px;
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 768px) {
+    .carousel-header {
+        height: 200px;
+    }
+}
+</style>
