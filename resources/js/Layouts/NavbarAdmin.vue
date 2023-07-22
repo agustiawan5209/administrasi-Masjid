@@ -12,7 +12,10 @@ import NavLink from '@/Components/NavLink.vue';
             Struktur Organisasi
         </NavLink>
         <NavLink :href="route('Kegiatan.index')" :active="route().current('Kegiatan.index') || route().current('Kegiatan.create') || route().current('Kegiatan.edit')">
-            Kegiatan Jadwal
+            Jadwal Kegiatan
+        </NavLink>
+        <NavLink :href="route('JadwalShalat.index')" :active="route().current('JadwalShalat.index') || route().current('JadwalShalat.create') || route().current('JadwalShalat.edit')">
+            Jadwal Shalat
         </NavLink>
         <NavLink :href="route('Kajian.index')" :active="route().current('Kajian.index') || route().current('kajian.create') || route().current('kajian.edit')">
             jadwal Kajian

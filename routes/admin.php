@@ -5,6 +5,7 @@ use App\Http\Controllers\DonaturController;
 use App\Http\Controllers\JadwalKegiatanController;
 use App\Http\Controllers\KajianController;
 use App\Http\Controllers\StrukturOrganisasiController;
+use App\Http\Controllers\TabelShalatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -75,6 +76,19 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
     // Route Data Artikel
     Route::group(['prefix' => 'Artikel', 'as' => 'Artikel.'], function () {
         Route::controller(ArtikelController::class)->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/form', 'create')->name('create');
+            Route::get('/edit', 'edit')->name('edit');
+            Route::get('/detail', 'show')->name('show');
+
+            Route::post('/store', 'store')->name('store');
+            Route::post('/update', 'update')->name('update');
+            Route::delete('/delete', 'destroy')->name('delete');
+        });
+    });
+    // Route Jadwal Shalat
+    Route::group(['prefix' => 'JadwalShalat', 'as' => 'JadwalShalat.'], function () {
+        Route::controller(TabelShalatController::class)->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('/form', 'create')->name('create');
             Route::get('/edit', 'edit')->name('edit');
