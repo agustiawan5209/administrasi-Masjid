@@ -48,7 +48,9 @@
   padding: 0;
 }
 .carousel__slide img{
-    object-fit: cover;
+    object-fit: contain;
+    object-position: 0px -300px;
+
 }
 
 .carousel__prev,

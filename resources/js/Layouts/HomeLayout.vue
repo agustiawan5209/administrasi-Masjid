@@ -3,6 +3,7 @@ import { Head, Link } from '@inertiajs/vue3';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import CarouselHeader from '@/Components/CarouselHeader.vue'
+
 </script>
 
 <template>
@@ -55,62 +56,7 @@ import CarouselHeader from '@/Components/CarouselHeader.vue'
     </nav>
 
     <main>
-        <!-- Carousel Header -->
-        <section class="carousel-header flex flex-1 justify-between w-full relative overflow-hidden">
-            <div
-                class=" w-full md:w-1/2  h-full absolute flex flex-col justify-start items-center z-20 bg-transparent overflow-hidden">
-                <div class="w-full h-full relative overflow-hidden flex flex-col items-center justify-center">
-                    <div class="absolute w-full h-full bg-black opacity-30 z-20 top-0"></div>
-                    <h1 class="text-2xl font-bold text-white mb-5 sm:mb-10 md:mb-20 z-50 drop-shadow-lg">Jadwal Shalat Hari
-                        Ini</h1>
-                    <ul class="grid grid-cols-5 bg-transparent px-5 w-full z-50">
-                        <li
-                            class=" bg-primary border-r border-l border-white py-2 text-center text-xs sm:text-sm md:text-base lg:text-lg">
-                            <dl>
-                                <dt class="text-base-100 font-bold text-base">Subuh</dt>
-                                <dd class="text-black text-sm">04:00 WITA</dd>
-                            </dl>
-                        </li>
-                        <li
-                            class=" bg-primary border-r border-l border-white py-2 text-center text-xs sm:text-sm md:text-base lg:text-lg">
-                            <dl>
-                                <dt class="text-base-100 font-bold text-base">Dzuhur</dt>
-                                <dd class="text-black text-sm">04:00 WITA</dd>
-                            </dl>
-                        </li>
-                        <li
-                            class=" bg-primary border-r border-l border-white py-2 text-center text-xs sm:text-sm md:text-base lg:text-lg">
-                            <dl>
-                                <dt class="text-base-100 font-bold text-base">Azhar</dt>
-                                <dd class="text-black text-sm">04:00 WITA</dd>
-                            </dl>
-                        </li>
-                        <li
-                            class=" bg-primary border-r border-l border-white py-2 text-center text-xs sm:text-sm md:text-base lg:text-lg">
-                            <dl>
-                                <dt class="text-base-100 font-bold text-base">Maghrib</dt>
-                                <dd class="text-black text-sm">04:00 WITA</dd>
-                            </dl>
-                        </li>
-                        <li
-                            class=" bg-primary border-r border-l border-white py-2 text-center text-xs sm:text-sm md:text-base lg:text-lg">
-                            <dl>
-                                <dt class="text-base-100 font-bold text-base">Isya</dt>
-                                <dd class="text-black text-sm">04:00 WITA</dd>
-                            </dl>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="w-full h-full">
-                <CarouselHeader />
-            </div>
-        </section>
-
-        <!-- Card -->
-        <section class="container mx-auto grid grid-cols-12 place-content-start">
-
-        </section>
+       <slot/>
     </main>
 </template>
 
