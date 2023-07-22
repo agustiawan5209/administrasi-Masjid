@@ -21,7 +21,7 @@ const flash = computed(() => page.props.flash)
             {{ flash.success }}
         </div>
     </div>
-    <div v-if="flash.errors !== null"
+    <div v-if="flash.error !== null"
         class="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
         role="alert">
         <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -31,7 +31,7 @@ const flash = computed(() => page.props.flash)
         </svg>
         <span class="sr-only">Error</span>
         <div>
-            {{ flash.errors }}
+            {{ flash.error }}
         </div>
     </div>
 </template>

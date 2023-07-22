@@ -22,13 +22,12 @@ class UpdateTabelShalatRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'slug'=> 'required|exists:tabel_shalats,id',
             'jenis' => 'required|string',
             'tanggal' => 'required|date',
             'hari' => 'required|string|max:50',
-            'waktu' => 'required|string|max:50',
-            'jam' => 'required',
-
+            'waktu' => 'nullable|string|max:50',
+            'waktu_array' => 'nullable|array',
+            'jam' => 'nullable',
             'muadzin' => 'nullable|string:max:50',
             'khotbah' => 'nullable|string|max:50',
             'imam' => 'nullable|string|max:50',

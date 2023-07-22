@@ -14,21 +14,53 @@ const props = defineProps({
         default:()=>({})
     }
 })
+
+function mergeObjectsWithSameKey(objects) {
+  return objects.reduce((result, currentObj) => {
+    for (const key in currentObj) {
+      if (currentObj.hasOwnProperty(key)) {
+        if (result.hasOwnProperty(key)) {
+          // Jika kunci sudah ada dalam objek hasil (result), maka gabungkan nilainya
+          if (Array.isArray(result[key])) {
+            // Jika nilai sekarang dan nilai yang sudah ada adalah array, gabungkan array tersebut
+            result[key] = result[key].concat(currentObj[key]);
+          } else if (typeof result[key] === 'object' && typeof currentObj[key] === 'object') {
+            // Jika nilai sekarang dan nilai yang sudah ada adalah objek, rekursif panggil fungsi mergeObjectsWithSameKey
+            result[key] = mergeObjectsWithSameKey([result[key], currentObj[key]]);
+          } else {
+            // Jika nilainya bukan array atau objek, maka gabungkan dalam array
+            result[key] = [result[key], currentObj[key]];
+          }
+        } else {
+          // Jika kunci belum ada dalam objek hasil (result), tambahkan kunci dan nilainya
+          result[key] = currentObj[key];
+        }
+      }
+    }
+    return result;
+  }, {});
+}
+
+const mergedObj = mergeObjectsWithSameKey(props.jadwal.data);
+console.log(mergedObj['waktu']);
+
+
+const WaktuShalat = ['Subuh', 'Dzuhur', 'Azhar', 'Maghrib', 'Isya',]
+const JamShalat = ['04:00','12:00','15:00','18:00','19:00']
 const AddForm = useForm({
-    jenis: props.jadwal.jenis,
-    tanggal: props.jadwal.tanggal,
-    hari: props.jadwal.hari,
-    waktu: props.jadwal.waktu,
-    jam: props.jadwal.jam,
-    muadzin: props.jadwal.muadzin,
-    khotbah: props.jadwal.khotbah,
-    imam: props.jadwal.imam,
+    jenis: 'shalat_wajib',
+    tanggal: mergedObj['tanggal'][0],
+    hari: mergedObj['hari'][0],
+    waktu_array: mergedObj['waktu'],
+    jam_array: mergedObj['jam'],
+
 })
 
 function submit() {
-    AddForm.post(route('JadwalShalat.update', {slug:props.jadwal.id}));
+    AddForm.post(route('JadwalShalat.update'));
 }
 const Hari = ['senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu', 'minggu']
+
 </script>
 
 <template>
@@ -36,70 +68,42 @@ const Hari = ['senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu', 'minggu']
 
         <Head title="Form Kegiatan" />
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Form Jadwal Shalat</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Form Jadwal Shalat Wajib</h2>
+            <p>{{AddForm.errors}}</p>
         </template>
         <section class="py-3 container mx-auto">
             <div class="w-full">
-                <form @submit.prevent="submit"
-                    class="w-full gap-7 bg-white px-4 py-3 rounded-lg shadow-md">
-                    <div class="flex items-center justify-center py-3 space-x-4">
-                        <div class="flex items-center gap-4">
-                            <input type="radio" v-model="AddForm.jenis" value="shalat_wajib"
-                                class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" />
-                            <InputLabel value="Shalat wajib" />
-                        </div>
-                        <div class="flex items-center gap-4">
-                            <input type="radio" v-model="AddForm.jenis" value="jumat"
-                                class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" />
-                            <InputLabel value="Shalat Jumat" />
-                        </div>
-                        <InputError :message="AddForm.errors.jenis" />
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-5 max-w-full">
-                        <div>
-                            <div class="block">
-                                <InputLabel value="Tanggal Shalat" />
-                                <TextInput type="date" v-model="AddForm.tanggal" />
-                                <InputError :message="AddForm.errors.tanggal" />
-                            </div>
+                <form @submit.prevent="submit" class="w-full gap-7 bg-white px-4 py-3 rounded-lg shadow-md">
 
-                            <div class="block">
-                                <InputLabel value="Hari" />
-                                <select type="text" v-model="AddForm.hari"
-                                    class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm placeholder:text-gray-300 w-full">
-                                    <option value="">---</option>
-                                    <option v-for="day in Hari" :value="day" class="capitalize">{{ day }}</option>
-                                </select>
-                                <InputError :message="AddForm.errors.hari" />
-                            </div>
-                            <div class="block">
-                                <InputLabel value="Waktu Shalat" />
-                                <TextInput type="text" v-model="AddForm.waktu" placeholder="dzuhur,azhar,maghrib,isya,subuh"/>
-                                <InputError :message="AddForm.errors.waktu" />
-                            </div>
-                            <div class="block">
-                                <InputLabel value="Jam Shalat" />
-                                <TextInput type="time" v-model="AddForm.jam" placeholder="00:00" />
-                                <InputError :message="AddForm.errors.jam" />
-                            </div>
+                    <div class="grid grid-cols-1" v-if="AddForm.jenis == 'shalat_wajib'">
+                        <div class="block">
+                            <InputLabel value="Tanggal Shalat" />
+                            <TextInput type="date" v-model="AddForm.tanggal" />
+                            <InputError :message="AddForm.errors.tanggal" />
                         </div>
 
+                        <div class="block">
+                            <InputLabel value="Hari" />
+                            <select  v-model="AddForm.hari"
+                                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm placeholder:text-gray-300 w-full">
+                                <option value="">---</option>
+                                <option v-for="day in Hari" :value="day" class="capitalize">{{ day }}</option>
+                            </select>
+                            <InputError :message="AddForm.errors.hari" />
+                        </div>
                         <div>
-                            <div class="block" v-if="AddForm.jenis == 'jumat'">
-                                <InputLabel value="Muadzin Jum'at" />
-                                <TextInput type="text" v-model="AddForm.muadzin" />
-                                <InputError :message="AddForm.errors.muadzin" />
+                            <div class="block mb-3 border-2 px-2 py-2 border-gray-700" v-for="(shalat,index) in WaktuShalat">
+                                <div>
+                                    <InputLabel :value="'Waktu Shalat ' + shalat" />
+                                    <input type="text" v-model="AddForm.waktu_array[index]" :id="shalat" :name="shalat" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm placeholder:text-gray-300 w-full"  />
+                                </div>
+                                <div>
+                                    <InputLabel :value="'Jam Shalat ' + shalat" />
+                                    <input type="time" v-model="AddForm.jam_array[index]" :id="'jam' + shalat"
+                                        :name="'jam' + shalat"  class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm placeholder:text-gray-300 w-full" />
+                                </div>
                             </div>
-                            <div class="block" v-if="AddForm.jenis == 'jumat'">
-                                <InputLabel value="Pembawa Khotbah Jum'at" />
-                                <TextInput type="text" v-model="AddForm.khotbah" />
-                                <InputError :message="AddForm.errors.khotbah" />
-                            </div>
-                            <div class="block" v-if="AddForm.jenis == 'jumat'">
-                                <InputLabel value="Imam Jum'at" />
-                                <TextInput type="text" v-model="AddForm.imam" />
-                                <InputError :message="AddForm.errors.imam" />
-                            </div>
+                            <InputError :message="AddForm.errors.waktu" />
                         </div>
                     </div>
                     <div class="col-span-2">
