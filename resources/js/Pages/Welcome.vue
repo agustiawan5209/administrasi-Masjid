@@ -4,21 +4,35 @@ import HomeLayout from '@/Layouts/HomeLayout.vue'
 
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import CarouselHeader from '@/Components/CarouselHeader.vue'
-
+import { ref } from 'vue'
 const props = defineProps({
-    jadwal_shalat:{
-        type:Object,
-        default:()=>({}),
+    jadwal_shalat: {
+        type: Object,
+        default: () => ({}),
+    },
+    jadwal_kajian: {
+        type: Object,
+        default: () => ({}),
     },
 })
-console.log(props.jadwal_shalat);
+
+const time = ref(null)
+const interval = setInterval(() => {
+    time.value = Intl.DateTimeFormat(navigator.language, {
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric'
+    }).format()
+}, 1000);
+interval
+console.log(time.value)
 </script>
 
 <template>
     <Head title="Home" />
     <HomeLayout>
-         <!-- Carousel Header -->
-         <section class="carousel-header flex flex-1 justify-between w-full relative overflow-hidden">
+        <!-- Carousel Header -->
+        <section class="carousel-header flex flex-1 justify-between w-full relative overflow-hidden">
             <div
                 class=" w-full md:w-1/2  h-full absolute flex flex-col justify-start items-center z-20 bg-transparent overflow-hidden">
                 <div class="w-full h-full relative overflow-hidden flex flex-col items-center justify-center">
@@ -37,38 +51,68 @@ console.log(props.jadwal_shalat);
                 </div>
             </div>
             <div class="w-full h-full">
+                <div class="absolute w-full h-full grid place-content-center">
+                    {{ time }}
+                </div>
                 <CarouselHeader />
             </div>
         </section>
 
         <!-- Jadwal Kegiatan -->
-        <section class="container mx-auto h-max flex justify-center relative">
-            <div class="absolute bg-success h-1/3 w-full top-1/4"></div>
-            <table class="w-full z-20 bg-transparent">
-                <caption>Kajian Hari ini</caption>
-                <thead>
-                    <tr>
-                        <th scope="col">Materi Kajian</th>
-                        <th scope="col">Pembawa Materi</th>
-                        <th scope="col">Pembawa Materi</th>
-                    </tr>
-                </thead>
-            </table>
+        <section class="container mx-auto text-center flex justify-center  relative">
+            <div class=" bg-success w-full flex justify-center top-3.5 rounded-lg">
+                <table class="w-1/2 z-20 bg-transparent my-5">
+                    <caption class="text-2xl font-bold text-white">Kajian Hari ini</caption>
+                    <thead class="bg-transparent">
+                        <tr>
+                            <th scope="col" class="px-2 py-1 border text-center text-white">Materi Kajian</th>
+                            <th scope="col" class="px-2 py-1 border text-center text-white">Waktu Kajian</th>
+                            <th scope="col" class="px-2 py-1 border text-center text-white">Pembawa Kajian</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="kajian in jadwal_kajian">
+                            <td class="px-2 py-1 border text-center text-white">{{ kajian.judul }}</td>
+                            <td class="px-2 py-1 border text-center text-white">{{ kajian.waktu }}</td>
+                            <td class="px-2 py-1 border text-center text-white">{{ kajian.uztadz }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
         <!-- Card -->
         <section class="container mx-auto flex flex-wrap justify-center gap-10 my-5 place-content-start">
-            <div class="w-1/3 h-72 bg-error overflow-hidden">
+            <div class="w-1/3 h-72 bg-error overflow-hidden rounded-2xl shadow-sm">
                 <img src="/img/masjid (1).jpg" class="object-cover w-full h-full object-bottom" alt="">
             </div>
-            <div class="w-1/2 h-72 bg-info"></div>
-            <div class="w-1/2 h-72 bg-info"></div>
-            <div class="w-1/3 h-72 bg-error overflow-hidden">
+            <div class="w-1/2 h-72 ">
+                <div class="w-full h-max p-3 shadow-lg border border-gray-200 rounded-lg">
+                    <h1 class="text-3xl text-success font-bold">Kajian</h1>
+                    <p class="text-justify text-lg">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem cum deserunt necessitatibus
+                        aliquam eius. Enim, illum numquam. Ratione quae eius sit at itaque molestias, atque blanditiis
+                        reiciendis distinctio porro natus repellendus laudantium recusandae illo rem aut, animi sunt soluta!
+                        Dolor, dolore porro quos ipsam nisi eum fugiat natus veritatis dolorem.
+                    </p>
+                    <PrimaryButton class="bg-success text-white">Selengkapnya</PrimaryButton>
+
+                </div>
+            </div>
+            <div class="w-1/2 h-72 ">
+                <div class="w-full h-max p-3 shadow-lg border border-gray-200 rounded-lg">
+                    <h1 class="text-3xl text-success font-bold">Jadwal Kegiatan</h1>
+                    <p class="text-justify text-lg">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem cum deserunt necessitatibus
+                        aliquam eius. Enim, illum numquam. Ratione quae eius sit at itaque molestias, atque blanditiis
+                        reiciendis distinctio porro natus repellendus laudantium recusandae illo rem aut, animi sunt soluta!
+                        Dolor, dolore porro quos ipsam nisi eum fugiat natus veritatis dolorem.
+                    </p>
+                    <PrimaryButton class="bg-success text-white">Selengkapnya</PrimaryButton>
+                </div>
+            </div>
+            <div class="w-1/3 h-72 bg-error overflow-hidden rounded-2xl shadow-sm">
                 <img src="/img/masjid (2).jpg" class="object-cover w-full h-full object-bottom" alt="">
             </div>
-            <div class="w-1/3 h-72 bg-error overflow-hidden">
-                <img src="/img/masjid (3).jpg" class="object-cover w-full h-full object-bottom" alt="">
-            </div>
-            <div class="w-1/2 h-72 bg-info"></div>
         </section>
     </HomeLayout>
 </template>
