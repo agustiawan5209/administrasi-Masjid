@@ -35,6 +35,7 @@ class HomeController extends Controller
         $this_day = Carbon::now()->format('d');
         $this_month = Carbon::now()->format('m');
         $kegiatan_hari_ini = JadwalKegiatan::whereDay('tanggal', $this_day)->get();
+        // dd($kegiatan_hari_ini);
         return Inertia::render('Kegiatan', [
             'kegiatan_hari_ini' => $kegiatan_hari_ini,
             'kegiatan_bulan_ini'=> JadwalKegiatan::whereMonth('tanggal', $this_month)->get(),
