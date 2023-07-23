@@ -22,6 +22,7 @@ Route::get('/', [HomeController::class,'index'])->name('welcome');
 Route::get('/pengumuman', [HomeController::class,'artikel'])->name('pengumuman');
 Route::get('/pengumuman/{tanggal}', [HomeController::class,'showArtikel'])->name('pengumuman.detail');
 Route::get('/jadwal-kegiatan', [HomeController::class,'kegiatan'])->name('kegiatan-masjid');
+Route::get('/jadwal-kajian', [HomeController::class,'kajian'])->name('kajian-masjid');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
