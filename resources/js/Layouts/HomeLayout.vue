@@ -23,8 +23,8 @@ import CarouselHeader from '@/Components/CarouselHeader.vue'
     <nav class="bg-base-100 flex flex-wrap sm:flex-row items-center justify-between md:pr-10">
         <ul class="flex flex-wrap sm:flex-row md:space-x-6  md:pl-10 border-b-2 border-base-100">
             <li class="list-none group hover:bg-white py-3 border-black px-2 cursor-pointer">
-                <a href="#"
-                    class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Home</a>
+                <Link :href="route('welcome')"
+                    class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Home</Link>
             </li>
             <li class="list-none group hover:bg-white py-3 border-black px-2 cursor-pointer">
                 <a href="#"
@@ -36,8 +36,8 @@ import CarouselHeader from '@/Components/CarouselHeader.vue'
                     class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Tentang</a>
             </li>
             <li class="list-none group hover:bg-white py-3 border-black px-2 cursor-pointer">
-                <a href="#"
-                    class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Pengumuman</a>
+                <Link :href="route('pengumuman')"
+                    class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Pengumuman</Link>
             </li>
             <li class="list-none group hover:bg-white py-3 border-black px-2 cursor-pointer">
                 <a href="#"
