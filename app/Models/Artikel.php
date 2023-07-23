@@ -19,7 +19,7 @@ class Artikel extends Model
     public function pathFoto() : Attribute
     {
         return new Attribute(
-            get:fn()=> url('storage/artikel/'. $this->foto)
+            get:fn()=> $this->foto
         );
     }
 

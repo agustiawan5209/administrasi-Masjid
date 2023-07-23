@@ -41,9 +41,13 @@ class HomeController extends Controller
         ]);
     }
 
-    public function showArtikel(){
-        return Inertia::render('ArtikelShow', [
-            'artikel' => Artikel::find(Request::input('slug')),
+    public function showArtikel($tanggal){
+        $artikel = Artikel::find(Request::input('slug'));
+        return Inertia::render('DetailArtikel', [
+            'artikel' => $artikel,
+            'tanggal'=> $tanggal,
+            'artikel_relate' => Artikel::where('kategori', '=', $artikel->kategori)->orderBy('id', 'desc')->paginate(5),
+
         ]);
     }
 }
