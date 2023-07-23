@@ -20,6 +20,7 @@ use App\Http\Controllers\ProfileController;
 
 Route::get('/', [HomeController::class,'index'])->name('welcome');
 Route::get('/pengumuman', [HomeController::class,'artikel'])->name('pengumuman');
+Route::get('/jadwal-kegiatan', [HomeController::class,'kegiatan'])->name('kegiatan-masjid');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

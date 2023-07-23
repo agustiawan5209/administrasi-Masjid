@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artikel;
+use App\Models\JadwalKegiatan;
 use App\Models\Kajian;
 use App\Models\TabelShalat;
 use Carbon\Carbon;
@@ -23,11 +24,20 @@ class HomeController extends Controller
 
     public function artikel(){
         $this_month = Carbon::now()->format('m');
+        $latest_artikel = Artikel::latest()->first();
         return Inertia::render('Artikel', [
-            'artikel_relate' => Artikel::orderBy('id', 'desc')->paginate(10),
-            'latest_artikel' => Artikel::orderBy('id', 'desc')->paginate(10),
-            'artikel_terbaru' => Artikel::latest()->first(),
+            'latest_artikel' => $latest_artikel,
+            'artikel_relate' => Artikel::where('kategori', '=', $latest_artikel->kategori)->orderBy('id', 'desc')->paginate(5),
             'artikel_terbaru' => Artikel::whereMonth('tanggal',$this_month)->paginate(10),
+        ]);
+    }
+    public function kegiatan(){
+        $this_day = Carbon::now()->format('d');
+        $this_month = Carbon::now()->format('m');
+        $kegiatan_hari_ini = JadwalKegiatan::whereDay('tanggal', $this_day)->get();
+        return Inertia::render('Kegiatan', [
+            'kegiatan_hari_ini' => $kegiatan_hari_ini,
+            'kegiatan_bulan_ini'=> JadwalKegiatan::whereMonth('tanggal', $this_month)->get(),
         ]);
     }
 

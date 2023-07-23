@@ -28,21 +28,21 @@ import CarouselHeader from '@/Components/CarouselHeader.vue'
             </li>
             <li class="list-none group hover:bg-white py-3 border-black px-2 cursor-pointer">
                 <a href="#"
-                    class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Struktur
-                    Organisasi</a>
+                    class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Tentang</a>
             </li>
             <li class="list-none group hover:bg-white py-3 border-black px-2 cursor-pointer">
                 <a href="#"
-                    class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Tentang</a>
+                    class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Struktur
+                    Organisasi</a>
             </li>
             <li class="list-none group hover:bg-white py-3 border-black px-2 cursor-pointer">
                 <Link :href="route('pengumuman')"
                     class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Pengumuman</Link>
             </li>
             <li class="list-none group hover:bg-white py-3 border-black px-2 cursor-pointer">
-                <a href="#"
+                <Link :href="route('kegiatan-masjid')"
                     class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Jadwal
-                    Kegiatan</a>
+                    Kegiatan</Link>
             </li>
             <li class="list-none group hover:bg-white py-3 border-black px-2 cursor-pointer">
                 <a href="#"
