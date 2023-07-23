@@ -17,7 +17,12 @@ class JadwalKegiatanFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'tanggal'=> $this->faker->dateTimeBetween('-1 week', '+1 week'),
+            'waktu'=> $this->faker->time(),
+            'kegiatan'=> $this->faker->realText(20),
+            'tempat'=> $this->faker->address(),
+            'ket'=> $this->faker->paragraph(),
+            'penanggung_jawab'=> $this->faker->name(),
         ];
     }
 }
