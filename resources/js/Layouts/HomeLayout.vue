@@ -45,8 +45,8 @@ import CarouselHeader from '@/Components/CarouselHeader.vue'
                     Kegiatan</Link>
             </li>
             <li class="list-none group hover:bg-white py-3 border-black px-2 cursor-pointer">
-                <a href="#"
-                    class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Kajian</a>
+                <Link :href="route('kajian-masjid')"
+                    class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Kajian</Link>
             </li>
         </ul>
         <form action="#" class="flex flex-row gap-0">

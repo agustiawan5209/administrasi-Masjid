@@ -41,6 +41,16 @@ class HomeController extends Controller
             'kegiatan_bulan_ini'=> JadwalKegiatan::whereMonth('tanggal', $this_month)->get(),
         ]);
     }
+    public function kajian(){
+        $this_day = Carbon::now()->format('d');
+        $this_month = Carbon::now()->format('m');
+        $kajian_hari_ini = Kajian::whereDay('tanggal', $this_day)->get();
+
+        return Inertia::render('Kajian', [
+            'kajian_hari_ini' => $kajian_hari_ini,
+            'kajian_bulan_ini'=> Kajian::whereMonth('tanggal', $this_month)->get(),
+        ]);
+    }
 
     public function showArtikel($tanggal){
         $artikel = Artikel::find(Request::input('slug'));
