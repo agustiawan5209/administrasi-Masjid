@@ -148,6 +148,9 @@ function deleteJadwal() {
                                                     <DropdownLink class="bg-green-500 hover:bg-green-600 active:bg-green-400 text-white"
                                                         :href="route('Artikel.edit', { judul: item.judul, slug: item.id, isi: item.isi, })">
                                                         Edit </DropdownLink>
+                                                    <DropdownLink class="bg-blue-500 hover:bg-blue-600 active:bg-blue-400 text-white"
+                                                        :href="route('Artikel.show', { judul: item.judul, slug: item.id, isi: item.isi, })">
+                                                        Detail </DropdownLink>
                                                     <PrimaryButton type="button" class="bg-error text-white hover:bg-red-600 active:bg-red-400 w-full block"
                                                         @click="showModaldelete(item.id)">
                                                         Hapus
