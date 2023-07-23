@@ -66,7 +66,7 @@ import CarouselHeader from '@/Components/CarouselHeader.vue'
                 <a href="/" class="flex items-center mb-4 sm:mb-0">
                   <ApplicationLogo class="w-20" />
 
-                    <span class="self-center text-2xl font-semibold whitespace-nowrap text-white"><span>MASJID</span> <strong>ISMUL A’ZHAM MAKASSAR</strong></span>
+                    <span class="self-center text-sm md:text-2xl font-semibold whitespace-nowrap text-white flex flex-col md:flex-row"><span>MASJID</span> <strong>ISMUL A’ZHAM MAKASSAR</strong></span>
                 </a>
                 <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-white sm:mb-0 dark:text-gray-400">
                     <li>

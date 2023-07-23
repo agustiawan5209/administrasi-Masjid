@@ -21,9 +21,9 @@ const props  = defineProps({
 
         <Head :title="artikel.judul" />
 
-        <section class="container mx-auto grid grid-cols-12 gap-8 py-5">
+        <section class="container mx-auto grid grid-cols-12 md:gap-8 py-5">
 
-            <div class="col-span-7">
+            <div class=" col-span-12 lg:col-span-7">
                 <div class="w-full">
                    <transition name="fade">
                     <article>
@@ -40,7 +40,7 @@ const props  = defineProps({
                 </div>
 
             </div>
-            <aside class="col-span-5">
+            <aside class=" col-span-12 lg:col-span-5">
                 <h1 class="text-2xl">Lainnya</h1>
 
                 <ArtikelVue v-for="(artikel, index) in artikel_relate.data" :responsiveClass="'md:flex-row mb-5'" :data-index="index" :artikel="artikel"  :MaxTextJudul="'base'" :MaxTextDesc="'sm'" :maxWidthImage="'w3'"></ArtikelVue>

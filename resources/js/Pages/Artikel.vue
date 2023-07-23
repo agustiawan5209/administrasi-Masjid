@@ -28,9 +28,9 @@ const props = defineProps({
 
         <Head title="Artikel" />
 
-        <section class="container mx-auto grid grid-cols-12 gap-8 py-5">
+        <section class="container mx-auto grid grid-cols-12 md:gap-8 py-5">
 
-            <div class="col-span-7">
+            <div class=" col-span-12 md:col-span-7">
                 <div class="w-full">
                     <h1 class="text-2xl">Terbaru</h1>
                     <ArtikelVue :artikel="latest_artikel" :maxWidthImage="'full'"  :MaxTextJudul="'2xl'" :MaxTextDesc="'base'"></ArtikelVue>
@@ -39,18 +39,17 @@ const props = defineProps({
 
                 <div class="article terbaru mt-20">
                     <h3 class="text-2xl">Artikel Bulan Ini</h3>
-                    <div class="grid grid-cols-3 gap-3">
-                        <ArtikelVue v-for="(artikel, index) in artikel_terbaru.data" :maxWidthImage="'whfull'" :data-index="index" :artikel="artikel"  :MaxTextJudul="'base'" :MaxTextDesc="'sm'">
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                        <ArtikelVue v-for="(artikel, index) in artikel_terbaru.data" :responsiveClass="'2xl:flex-row mb-5 col'" :maxWidthImage="'whfull'" :data-index="index" :artikel="artikel"  :MaxTextJudul="'base'" :MaxTextDesc="'sm'">
 
                         </ArtikelVue>
 
                     </div>
                 </div>
             </div>
-            <aside class="col-span-5">
+            <aside class=" col-span-12 md:col-span-5">
                 <h1 class="text-2xl">Lainnya</h1>
-
-                <ArtikelVue v-for="(artikel, index) in artikel_relate.data" :responsiveClass="'md:flex-row mb-5'" :data-index="index" :artikel="artikel"  :MaxTextJudul="'base'" :MaxTextDesc="'sm'" :maxWidthImage="'w3'"></ArtikelVue>
+                <ArtikelVue v-for="(artikel, index) in artikel_relate.data" :responsiveClass="'md:flex-row mb-5 '" :data-index="index" :artikel="artikel"  :MaxTextJudul="'base'" :MaxTextDesc="'sm'" :maxWidthImage="'w3'"></ArtikelVue>
 
 
             </aside>

@@ -63,9 +63,9 @@ const maxWidthImageClass = computed(() => {
     return {
         full: 'w-full h-64',
         'whfull': 'w-full h-32',
-        'w2': 'w-1/2 h-48',
-        'w3': 'w-1/3 h-48',
-        'w4': 'w-1/4 h-20',
+        'w2': ' w-full md:w-1/2  h-48',
+        'w3': ' w-full md:w-1/3 h-48',
+        'w4': ' w-full md:w-1/4 h-20',
     }[props.maxWidthImage];
 });
 </script>
@@ -77,7 +77,7 @@ const maxWidthImageClass = computed(() => {
             :class="responsiveClass">
             <img class="object-cover object-bottom  rounded-t-lg rounded-l-lg" :class="maxWidthImageClass"
                 src="/img/masjid (1).jpg" alt="">
-            <div class="w-full p-4 leading-normal">
+            <div class="w-full p-1 md:p-4 leading-normal">
                 <h2 class="mb-2 text-base font-bold tracking-tight text-gray-900 dark:text-white"
                     :class="MaxTextJudulClass">
                     {{ artikel.judul }}</h2>
@@ -88,7 +88,7 @@ const maxWidthImageClass = computed(() => {
                 </p>
                 <time datetime="Y-m-d" class="text-gray-500 text-xs">{{ artikel.tanggal }}</time> <br>
                 <Link :href="route('pengumuman.detail', { tanggal: artikel.tanggal, slug: artikel.id, judul: artikel.judul })">
-                <PrimaryButton class="bg-primary">Selengkapnya</PrimaryButton>
+                <PrimaryButton class="bg-primary text-xs xl:text-base">Selengkapnya</PrimaryButton>
                 </Link>
             </div>
         </article>
