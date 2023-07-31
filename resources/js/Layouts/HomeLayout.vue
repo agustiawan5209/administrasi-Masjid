@@ -36,7 +36,7 @@ import CarouselHeader from '@/Components/CarouselHeader.vue'
                     Organisasi</a>
             </li>
             <li class="list-none group hover:bg-white py-3 border-black px-2 cursor-pointer">
-                <Link :href="route('pengumuman')"
+                <Link :href="route('pengumuman')" :active="route().current('pengumuman')"
                     class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Pengumuman</Link>
             </li>
             <li class="list-none group hover:bg-white py-3 border-black px-2 cursor-pointer">
