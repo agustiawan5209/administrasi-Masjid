@@ -35,12 +35,12 @@ updateTime();
 function updateTime() {
     var cd = new Date();
     time.value = zeroPadding(cd.getHours(), 2) + ':' + zeroPadding(cd.getMinutes(), 2) + ':' + zeroPadding(cd.getSeconds(), 2);
-    date.value = zeroPadding(cd.getFullYear(), 4) + '-' + zeroPadding(cd.getMonth()+1, 2) + '-' + zeroPadding(cd.getDate(), 2) + ' ' + week[cd.getDay()];
+    date.value = zeroPadding(cd.getFullYear(), 4) + '-' + zeroPadding(cd.getMonth() + 1, 2) + '-' + zeroPadding(cd.getDate(), 2) + ' ' + week[cd.getDay()];
 };
 
 function zeroPadding(num, digit) {
     var zero = '';
-    for(var i = 0; i < digit; i++) {
+    for (var i = 0; i < digit; i++) {
         zero += '0';
     }
     return (zero + num).slice(-digit);
@@ -58,13 +58,14 @@ function zeroPadding(num, digit) {
                     <div class="absolute w-full h-full bg-black opacity-30 z-20 top-0"></div>
                     <h1 class="text-2xl font-bold text-white  z-50 drop-shadow-lg">Jadwal Shalat Hari
                         Ini</h1>
-                        <time datetime="H:i:s" class="text-3xl text-white font-bold z-50 mb-2">{{ time }} WITA</time>
-                        <!-- <time datetime="Y-m-d" class="text-3xl text-white font-bold z-50 mb-2">{{ date }}</time> -->
+                    <time datetime="H:i:s" class="text-3xl text-white font-bold z-50 mb-2">{{ time }} WITA</time>
+                    <!-- <time datetime="Y-m-d" class="text-3xl text-white font-bold z-50 mb-2">{{ date }}</time> -->
                     <ul class="grid grid-cols-5 bg-transparent px-5 w-full z-50 rounded-md overflow-hidden">
                         <li v-for="jadwal in jadwal_shalat.data"
                             class=" bg-primary border-r border-l border-white py-2 text-center text-xs sm:text-sm md:text-base lg:text-lg">
                             <dl>
-                                <dt class="text-white font-bold text-base"><span class="border-b">{{ jadwal.waktu }}</span></dt>
+                                <dt class="text-white font-bold text-base"><span class="border-b">{{ jadwal.waktu }}</span>
+                                </dt>
                                 <dd class="text-white text-sm">{{ jadwal.jam }} WITA</dd>
                             </dl>
                         </li>
@@ -113,7 +114,9 @@ function zeroPadding(num, digit) {
                         reiciendis distinctio porro natus repellendus laudantium recusandae illo rem aut, animi sunt soluta!
                         Dolor, dolore porro quos ipsam nisi eum fugiat natus veritatis dolorem.
                     </p>
+                    <Link :href="route('kajian-masjid')">
                     <PrimaryButton class="bg-success text-white">Selengkapnya</PrimaryButton>
+                    </Link>
 
                 </div>
             </div>
@@ -126,7 +129,9 @@ function zeroPadding(num, digit) {
                         reiciendis distinctio porro natus repellendus laudantium recusandae illo rem aut, animi sunt soluta!
                         Dolor, dolore porro quos ipsam nisi eum fugiat natus veritatis dolorem.
                     </p>
+                    <Link :href="route('kegiatan-masjid')">
                     <PrimaryButton class="bg-success text-white">Selengkapnya</PrimaryButton>
+                    </Link>
                 </div>
             </div>
             <div class="w-1/3 h-72 bg-error overflow-hidden rounded-2xl shadow-sm">

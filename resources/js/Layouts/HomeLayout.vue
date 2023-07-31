@@ -31,9 +31,9 @@ import CarouselHeader from '@/Components/CarouselHeader.vue'
                     class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Tentang</a>
             </li>
             <li class="list-none group hover:bg-white py-3 border-black px-2 cursor-pointer">
-                <a href="#"
+                <Link :href="route('struktur-masjid')"
                     class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Struktur
-                    Organisasi</a>
+                    Organisasi</Link>
             </li>
             <li class="list-none group hover:bg-white py-3 border-black px-2 cursor-pointer">
                 <Link :href="route('pengumuman')" :active="route().current('pengumuman')"
@@ -47,6 +47,10 @@ import CarouselHeader from '@/Components/CarouselHeader.vue'
             <li class="list-none group hover:bg-white py-3 border-black px-2 cursor-pointer">
                 <Link :href="route('kajian-masjid')"
                     class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Kajian</Link>
+            </li>
+            <li class="list-none group hover:bg-white py-3 border-black px-2 cursor-pointer">
+                <Link :href="route('laporankas-masjid')"
+                    class="group-hover:bg-white text-white text-xs sm:text-sm md:text-base group-hover:text-base-100 font-semibold">Laporan Kas</Link>
             </li>
         </ul>
         <form action="#" class="flex flex-row gap-0">

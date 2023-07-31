@@ -23,6 +23,8 @@ Route::get('/pengumuman', [HomeController::class,'artikel'])->name('pengumuman')
 Route::get('/pengumuman/{tanggal}', [HomeController::class,'showArtikel'])->name('pengumuman.detail');
 Route::get('/jadwal-kegiatan', [HomeController::class,'kegiatan'])->name('kegiatan-masjid');
 Route::get('/jadwal-kajian', [HomeController::class,'kajian'])->name('kajian-masjid');
+Route::get('/struktur-organisasi', [HomeController::class,'struktur'])->name('struktur-masjid');
+Route::get('/laporan-kas', [HomeController::class,'laporankas'])->name('laporankas-masjid');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Artikel;
 use App\Models\JadwalKegiatan;
 use App\Models\Kajian;
+use App\Models\KasMasjid;
+use App\Models\StrukturOrganisasi;
 use App\Models\TabelShalat;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Request;
@@ -29,6 +31,16 @@ class HomeController extends Controller
             'latest_artikel' => $latest_artikel,
             'artikel_relate' => Artikel::where('kategori', '=', $latest_artikel->kategori)->orderBy('id', 'desc')->paginate(5),
             'artikel_terbaru' => Artikel::whereMonth('tanggal',$this_month)->paginate(10),
+        ]);
+    }
+    public function Struktur(){
+        return Inertia::render('Struktur', [
+            'struktur'=> StrukturOrganisasi::orderBy('id','asc')->latest()->first(),
+        ]);
+    }
+    public function laporankas(){
+        return Inertia::render('LaporanKas', [
+            'kas'=> KasMasjid::orderBy('id','desc')->get(),
         ]);
     }
     public function kegiatan(){
