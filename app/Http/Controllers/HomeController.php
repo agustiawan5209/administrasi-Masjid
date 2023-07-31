@@ -44,13 +44,20 @@ class HomeController extends Controller
         ]);
     }
     public function kegiatan(){
+        $carbon = Carbon::now();
         $this_day = Carbon::now()->format('d');
         $this_month = Carbon::now()->format('m');
+        $next_month = $carbon->addMonth()->format('m');
         $kegiatan_hari_ini = JadwalKegiatan::whereDay('tanggal', $this_day)->get();
+        $kegiatan = JadwalKegiatan::whereMonth('tanggal', '=', $this_month)->whereDay('tanggal', '>' ,$this_day)->get();
+        if($kegiatan->count() < 1){
+            $kegiatan = JadwalKegiatan::whereMonth('tanggal', '=', $next_month)->get();
+        }
+        // dd($kegiatan);
         // dd($kegiatan_hari_ini);
         return Inertia::render('Kegiatan', [
             'kegiatan_hari_ini' => $kegiatan_hari_ini,
-            'kegiatan_bulan_ini'=> JadwalKegiatan::whereMonth('tanggal', $this_month)->get(),
+            'kegiatan_bulan_ini'=> $kegiatan,
         ]);
     }
     public function kajian(){
@@ -60,7 +67,7 @@ class HomeController extends Controller
 
         return Inertia::render('Kajian', [
             'kajian_hari_ini' => $kajian_hari_ini,
-            'kajian_bulan_ini'=> Kajian::whereMonth('tanggal', $this_month)->get(),
+            'kajian_bulan_ini'=> Kajian::whereMonth('tanggal', '=', $this_month)->whereDay('tanggal', '>' ,$this_day)->get(),
         ]);
     }
 
