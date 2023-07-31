@@ -23,7 +23,7 @@ import NavLink from '@/Components/NavLink.vue';
         <NavLink :href="route('Donatur.index')" :active="route().current('Donatur.index') || route().current('Donatur.create') || route().current('Donatur.edit')">
             Data Donatur
         </NavLink>
-        <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
+        <NavLink :href="route('LaporanAdmin.keuangan-admin')" :active="route().current('LaporanAdmin.keuangan-admin')">
             Laporan Kas
         </NavLink>
         <NavLink :href="route('Artikel.index')" :active="route().current('Artikel.index') || route().current('Artikel.create') || route().current('Artikel.edit')">

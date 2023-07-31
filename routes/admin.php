@@ -1,12 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KajianController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\DonaturController;
-use App\Http\Controllers\JadwalKegiatanController;
-use App\Http\Controllers\KajianController;
-use App\Http\Controllers\StrukturOrganisasiController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\TabelShalatController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\JadwalKegiatanController;
+use App\Http\Controllers\StrukturOrganisasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,6 +101,14 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
             Route::post('/updateJumat', 'updateJumat')->name('updateJumat');
             Route::delete('/delete', 'destroy')->name('delete');
             Route::delete('/deleteJumat', 'destroyJumat')->name('deleteJumat');
+        });
+    });
+
+    Route::group(['prefix' => 'LaporanKas', 'as' => 'LaporanAdmin.'], function () {
+        Route::controller(LaporanController::class)->group(function () {
+            Route::get('/keuangan', 'laporanKasAdmin')->name('keuangan-admin');
+            Route::get('Excel', 'generateLaporanKeuanganExcel')->name('keuangan-Export-Excel');
+            Route::get('PDF', 'generateLaporanKeuanganPDF')->name('keuangan-Export-PDF');
         });
     });
 });
