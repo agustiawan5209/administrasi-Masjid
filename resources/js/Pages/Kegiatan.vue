@@ -54,7 +54,7 @@ const NonactiveClass = 'text-gray-400';
                 </div>
                 <transition  name="fade">
                     <main class="flex lg:gap-44"  v-if="VKegiatan == 'today'" :key="VKegiatan">
-                        <div class="flex flex-col justify-between gap-8 w-full h-full" v-if="kegiatan_hari_ini.length > 0">
+                        <div class="flex flex-col justify-between gap-8 w-full h-full">
                             <table class="w-full text-sm text-left text-gray-500">
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                                     <tr>
@@ -86,7 +86,7 @@ const NonactiveClass = 'text-gray-400';
                                 </tbody>
                             </table>
                         </div>
-                        <div class="flex flex-col justify-between gap-8 w-full h-full" v-else>
+                        <!-- <div class="flex flex-col justify-between gap-8 w-full h-full" v-else>
                             <div class="w-full h-96">
                                 <div class="w-full h-full flex flex-col justify-center items-center gap-8">
                                     <div class="flex justify-center items-center w-32 h-32 bg-gray-100 rounded-full">
@@ -102,9 +102,9 @@ const NonactiveClass = 'text-gray-400';
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </main>
-                    <main class="flex"  v-else-if="VKegiatan == 'soon'" :key="VKegiatan">
+                    <main class="flex"  v-else-if="VKegiatan == 'soon'">
                         <div class="flex flex-col justify-between gap-8 w-full h-full" v-if="kegiatan_bulan_ini.length > 0">
                             <table class="w-full text-sm text-left text-gray-500">
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
