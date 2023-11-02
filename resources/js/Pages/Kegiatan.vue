@@ -20,7 +20,7 @@ const props = defineProps({
     },
 })
 
-const VKegiatan = ref('soon');
+const VKegiatan = ref('today');
 const activeClass = 'bg-success text-white font-bold rounded-[44px]';
 const NonactiveClass = 'text-gray-400';
 </script>
