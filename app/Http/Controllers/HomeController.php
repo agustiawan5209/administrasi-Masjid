@@ -54,7 +54,7 @@ class HomeController extends Controller
             $kegiatan = JadwalKegiatan::whereMonth('tanggal', '=', $next_month)->get();
         }
         $semua_kegiatan = JadwalKegiatan::all();
-        dd($semua_kegiatan);
+        // dd($semua_kegiatan);
         // dd($kegiatan_hari_ini);
         return Inertia::render('Kegiatan', [
             'kegiatan_hari_ini' => $kegiatan_hari_ini,

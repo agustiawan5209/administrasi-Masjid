@@ -94,7 +94,7 @@ const NonactiveClass = 'text-gray-400';
                                     </div>
                                     <div class="flex flex-col justify-center items-center">
                                         <h2 class="text-blue-800 font-bold leading-6 text-center">
-                                            Tidak ada kegiatan di hari ini
+                                            Tidak ada kegiatan
                                         </h2>
                                         <p class="text-gray-500 text-sm font-light leading-6 text-center">
                                             Silakan lihat agenda akan datang atau lihat kegiatan lainnya.
@@ -145,7 +145,7 @@ const NonactiveClass = 'text-gray-400';
                                     </div>
                                     <div class="flex flex-col justify-center items-center">
                                         <h2 class="text-blue-800 font-bold leading-6 text-center">
-                                            Tidak ada kegiatan yang akan datang
+                                            Tidak ada kegiatan  di hari ini
                                         </h2>
                                         <p class="text-gray-500 text-sm font-light leading-6 text-center">
                                             Silakan lihat agenda hari ini
