@@ -14,6 +14,10 @@ const props = defineProps({
         type: Object,
         default: () => ({}),
     },
+    kajian: {
+        type: Object,
+        default: () => ({}),
+    },
 })
 
 const Vkajian = ref('today');
@@ -39,11 +43,11 @@ const NonactiveClass = 'text-gray-400';
                             class="switch-time w-full sm:w-80 h-14 rounded-3xl bg-gray-200 flex items-center justify-center">
                             <button @click="Vkajian = 'today'" :class="Vkajian == 'today' ? activeClass :NonactiveClass"
                                 class="w-40 h-11 px-4 py-3 m-1 flex items-center justify-center  transition-all delay-75">
-                                Hari ini
+                                Semua Kajian
                             </button>
                             <button @click="Vkajian = 'soon'" :class="Vkajian == 'soon' ? activeClass :NonactiveClass"
                                 class="w-40 h-11 px-4 py-3 m-1 flex items-center justify-center  transition-all delay-75">
-                                Akan Datang
+                               Kajian Bulan Ini
                             </button>
                         </div>
                     </div>
@@ -64,7 +68,7 @@ const NonactiveClass = 'text-gray-400';
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(item,index) in kajian_hari_ini" class="border-b ">
+                                    <tr v-for="(item,index) in kajian" class="border-b ">
                                         <th class="border text-center">{{ index+1 }}.</th>
 
 
@@ -114,7 +118,7 @@ const NonactiveClass = 'text-gray-400';
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(item,index) in kajian_hari_ini" class="border-b ">
+                                    <tr v-for="(item,index) in kajian_bulan_ini" class="border-b ">
                                         <th class="border text-center">{{ index+1 }}.</th>
 
 

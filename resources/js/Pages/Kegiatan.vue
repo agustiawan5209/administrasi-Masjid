@@ -14,9 +14,13 @@ const props = defineProps({
         type: Object,
         default: () => ({}),
     },
+    semua_kegiatan: {
+        type: Object,
+        default: () => ({}),
+    },
 })
 
-const VKegiatan = ref('today');
+const VKegiatan = ref('soon');
 const activeClass = 'bg-success text-white font-bold rounded-[44px]';
 const NonactiveClass = 'text-gray-400';
 </script>
@@ -39,11 +43,11 @@ const NonactiveClass = 'text-gray-400';
                             class="switch-time w-full sm:w-80 h-14 rounded-3xl bg-gray-200 flex items-center justify-center">
                             <button @click="VKegiatan = 'today'" :class="VKegiatan == 'today' ? activeClass :NonactiveClass"
                                 class="w-40 h-11 px-4 py-3 m-1 flex items-center justify-center  transition-all delay-75">
-                                Hari ini
+                                Semua Kegiatan
                             </button>
                             <button @click="VKegiatan = 'soon'" :class="VKegiatan == 'soon' ? activeClass :NonactiveClass"
                                 class="w-40 h-11 px-4 py-3 m-1 flex items-center justify-center  transition-all delay-75">
-                                Akan Datang
+                                Hari Ini
                             </button>
                         </div>
                     </div>
@@ -64,7 +68,7 @@ const NonactiveClass = 'text-gray-400';
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(item,index) in kegiatan_hari_ini" class="border-b ">
+                                    <tr v-for="(item,index) in semua_kegiatan" class="border-b ">
                                         <th class="border text-center">{{ index+1 }}.</th>
 
                                         <th scope="row"
@@ -115,7 +119,7 @@ const NonactiveClass = 'text-gray-400';
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(item,index) in kegiatan_bulan_ini" class="border-b ">
+                                    <tr v-for="(item,index) in kegiatan_hari_ini" class="border-b ">
                                         <th class="border text-center">{{ index+1 }}.</th>
 
                                         <th scope="row"

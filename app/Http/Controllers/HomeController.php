@@ -53,19 +53,22 @@ class HomeController extends Controller
         if($kegiatan->count() < 1){
             $kegiatan = JadwalKegiatan::whereMonth('tanggal', '=', $next_month)->get();
         }
+        $semua_kegiatan = JadwalKegiatan::all();
         // dd($kegiatan);
         // dd($kegiatan_hari_ini);
         return Inertia::render('Kegiatan', [
             'kegiatan_hari_ini' => $kegiatan_hari_ini,
             'kegiatan_bulan_ini'=> $kegiatan,
+            'semua_kegiatan'=> $semua_kegiatan,
         ]);
     }
     public function kajian(){
         $this_day = Carbon::now()->format('d');
         $this_month = Carbon::now()->format('m');
         $kajian_hari_ini = Kajian::whereDay('tanggal', $this_day)->get();
-
+        $kajian = Kajian::all();
         return Inertia::render('Kajian', [
+            'kajian' => $kajian,
             'kajian_hari_ini' => $kajian_hari_ini,
             'kajian_bulan_ini'=> Kajian::whereMonth('tanggal', '=', $this_month)->whereDay('tanggal', '>' ,$this_day)->get(),
         ]);
