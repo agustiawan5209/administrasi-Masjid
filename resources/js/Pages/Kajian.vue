@@ -54,7 +54,7 @@ const NonactiveClass = 'text-gray-400';
                 </div>
                 <transition  name="fade">
                     <main class="flex lg:gap-44"  v-if="Vkajian == 'today'" >
-                        <div class="flex flex-col justify-between gap-8 w-full h-full" v-if="kajian_hari_ini.length > 0">
+                        <div class="flex flex-col justify-between gap-8 w-full h-full" v-if="kajian.length > 0">
                             <table class="w-full text-sm text-left text-gray-500">
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                                     <tr>
