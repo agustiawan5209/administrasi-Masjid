@@ -30,7 +30,7 @@ const props = defineProps({
                 </div>
                 <transition  name="fade">
                     <main class="container mx-auto" >
-                        <img :src="struktur.path_gambar" class="w-full" alt="Ikon agenda kosong">
+                        <img :src="struktur.path_gambar" class="w-full" :alt="struktur.path_gambar">
                         <h2 class="text-blue-800 font-bold leading-6 text-center">
                             {{ struktur.name }}
                         </h2>

@@ -35,7 +35,7 @@ class HomeController extends Controller
     }
     public function Struktur(){
         return Inertia::render('Struktur', [
-            'struktur'=> StrukturOrganisasi::orderBy('id','desc')->latest()->first(),
+            'struktur'=> StrukturOrganisasi::latest()->first(),
         ]);
     }
     public function laporankas(){
