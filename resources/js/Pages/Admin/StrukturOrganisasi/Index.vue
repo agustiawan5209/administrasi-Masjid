@@ -59,7 +59,7 @@ function submit() {
                     <div class="max-w-7xl mx-auto bg-white p-4 lg:p-12 overflow-hidden shadow-sm sm:rounded-lg">
                         <PrimaryButton @click="showModal" v-if="struktur == null">Tambah</PrimaryButton>
                             <PrimaryButton @click="showModal" v-else>Ganti</PrimaryButton>
-                            <div class="w-full bg-red-300 h-screen" v-if="struktur !== null">
+                            <div class="w-full bg-gray-300 h-max flex justify-center" v-if="struktur !== null">
                                 <img :src="struktur.path_gambar" alt="">
                             </div>
                     </div>
