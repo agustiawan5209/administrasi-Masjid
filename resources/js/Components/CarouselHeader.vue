@@ -1,7 +1,7 @@
 <template>
-    <carousel :items-to-show="1" :wrap-around="true" :autoplay="2000">
+    <carousel :items-to-show="1" :wrap-around="true" :autoplay="10000">
       <slide v-for="slide in carouselItem" :key="slide" >
-        <img :src="slide.name" class="object-cover" />
+        <img :src="slide.name" class="object-cover w-full" />
       </slide>
 
     </carousel>
@@ -21,11 +21,11 @@
     data(){
         return{
             carouselItem:[
-                {name: '/img/masjid (1).jpg'},
-                {name: '/img/masjid (2).jpg'},
-                // {name: '/img/masjid (3).jpg'},
-                {name: '/img/masjid (4).jpg'},
-                {name: '/img/masjid (5).jpg'},
+                {name: '/img/masjid.jpg'},
+                // {name: '/img/masjid.jpg'},
+                // {name: '/img/masjid.jpg'},
+                // {name: '/img/masjid.jpg'},
+                // {name: '/img/masjid.jpg'},
             ]
         }
     }
