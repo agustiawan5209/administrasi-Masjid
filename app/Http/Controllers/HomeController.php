@@ -83,4 +83,9 @@ class HomeController extends Controller
 
         ]);
     }
+    public function tentang(){
+
+        return Inertia::render('Tentang', [
+        ]);
+    }
 }
